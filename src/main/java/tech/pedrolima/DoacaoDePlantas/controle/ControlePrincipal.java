@@ -8,7 +8,7 @@ public class ControlePrincipal {
 
     @GetMapping("/inicio")
     public String acessarPrincipal(){
-        return "sistema/home";
+        return "home.html";
     }
 
 }
