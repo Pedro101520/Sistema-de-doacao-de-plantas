@@ -1,3 +1,4 @@
+/* Variaveis */
 :root{
     --primary-color: #4CAF50;
     --white-color: #ffffff;
@@ -5,6 +6,7 @@
     --gap: 3rem;
 }
 
+/* Elementos */
 *{
     margin: 0;
     padding: 0;
@@ -52,6 +54,7 @@ a{
     text-decoration: none;
 }
 
+/* Classes */
 .main-bg{
     background-image: url('../img/main-bg.svg');
     background-size: cover;
@@ -70,10 +73,22 @@ a{
     color: var(--primary-color);
 }
 
+.main-content-inicio{
+    /* max-width: 120rem; */
+    margin: 0 auto;
+    padding: var(--gap);
+    color: var(--white-color);
+}
+
 .section{
     min-height: 100vb;
 }
 
+.menu-spacing{
+    height: 65px;
+}
+
+/* Menu */
 .menu{
     position: fixed;
     top: 0;
@@ -126,4 +141,36 @@ a{
 .menu ul li a:hover::after{
     width: 50%;
     left: 25%;
+}
+
+.inicio-content{
+    position: relative;
+    top: -8rem;
+    display: grid;
+    grid-template-columns: 3.32fr 2fr;
+    gap: var(--gap);
+    height: 100vh;
+    padding-right: 0;
+}
+
+.posicao-texto-inicio {
+    position: relative;
+    top: -5rem;
+}
+
+.inicio-text-content, .inicio-img{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+
+.inicio-text-content h2{
+    font-size: 7rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+.inicio-img img{
+    max-width: 100%;
+    height: auto;
 }
