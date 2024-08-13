@@ -19,6 +19,7 @@ html{
 }
 
 body{
+    overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
     font-size: 2rem;
     color: var(-primary-color);
@@ -280,11 +281,29 @@ body .full-width {
     color: var(--primary-color);
 }
 
-.footer{
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding: 1rem; /* Aumente o valor conforme necessário */
+    background-color: var(--white-color); /* Confirma o fundo branco */
 }
 
-.footer p{
+.footer .row {
+    margin: 0;
+}
+
+.footer .col-sm-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer p {
+    display: flex;
+    align-items: center;
+    margin: 0;
     color: black;
 }
 
