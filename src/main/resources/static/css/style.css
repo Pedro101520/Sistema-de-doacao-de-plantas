@@ -32,9 +32,9 @@ h1{
     font-size: 6rem;
 }
 
-h2{
-    font-size: 5.5rem;
-    text-transform: uppercase;
+h2 {
+    font-size: 2.5rem;
+    line-height: 1.2;
 }
 
 h3{
@@ -75,9 +75,8 @@ p{
 }
 
 .main-content{
-    max-width: 120rem;
+    max-width: 140rem;
     margin: 0 auto;
-    /* padding: 8rem var(--gap); */
     padding: var(--gap);
     color: var(--primary-color);
 }
@@ -91,7 +90,6 @@ p{
 .main-content-contact{
     max-width: 120rem;
     margin: 0 auto;
-    /* padding: 8rem var(--gap); */
     padding: var(--gap);
     color: var(--white-color);
 }
@@ -103,6 +101,14 @@ p{
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding-top: 5rem;
+}
+
+.navbar-toggle {
+    position: absolute;
+    top: 2rem; /* Ajusta a posição vertical do ícone do menu */
+    right: 2rem; /* Ajusta a posição horizontal do ícone do menu */
+    z-index: 10; /* Garante que o ícone esteja acima de outros elementos */
 }
 
 .section{
@@ -110,7 +116,7 @@ p{
 }
 
 .menu-spacing{
-    height: 65px;
+    height: 40px;
 }
 
 body .full-width {
@@ -126,9 +132,9 @@ body .full-width {
     right: 0;
     width: 100%;
     border-bottom: 0.1rem solid var(--light-gray-color);
-    z-index: 1000; /* Adicione esta linha */
-    background-color: var(--white-color); /* Garante que a navbar tenha um fundo */
-    opacity: 0.95; /* Torna a navbar ligeiramente translúcida */
+    z-index: 1000;
+    background-color: var(--white-color);
+    opacity: 0.95;
 }
 
 .menu-content{
@@ -199,6 +205,12 @@ body .full-width {
     width: 110%;
 }
 
+.inicio-text-content {
+    margin-top: 2rem; /* Ajusta a posição vertical do texto */
+    padding: 0 1rem; /* Ajusta o espaçamento lateral */
+    text-align: center;
+}
+
 .inicio-text-content, .inicio-img{
     display: flex;
     flex-flow: column wrap;
@@ -212,7 +224,7 @@ body .full-width {
 }
 
 .inicio-img img {
-    height: 108%;
+    height: 109%;
     width: auto;
     object-fit: cover;
     position: absolute;
@@ -226,7 +238,6 @@ body .full-width {
 .sobre-content{
     max-width: 64rem;
     display: flex;
-    /* flex-flow: column wrap; */
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
@@ -291,8 +302,11 @@ body .full-width {
 
 /* Botao */
 .button-container {
-    display: flex; /* Usa Flexbox para alinhar os botões horizontalmente */
-    gap: 10px; /* Espaço entre os botões */
+    display: flex;
+    justify-content: center; /* Centraliza os botões horizontalmente */
+    align-items: center; /* Alinha os botões verticalmente */
+    gap: 20px; /* Espaço entre os botões */
+    margin-top: 30px; /* Espaço entre o texto e os botões */
 }
 
 /* Botão Login */
@@ -304,7 +318,7 @@ body .full-width {
 .button {
     margin-left: 25px;
     display: inline-block;
-    background-color: #6B8E23 ;
+    background-color: #388E3C ;
     color: white;
     padding: 15px 20px;
     text-align: center;
@@ -321,7 +335,7 @@ body .full-width {
 
 .button span {
     display: block;
-    margin-top: 15px;
+    margin-top: 0px;
     text-align: center;
     position: relative;
     z-index: 999999;
@@ -329,7 +343,7 @@ body .full-width {
 
 .button::before{
     content: '';
-    background-color: #3CB371;
+    background-color: #2E7D32 ;
     width: 0px;
     height: 0px;
     position: absolute;
@@ -349,13 +363,12 @@ body .full-width {
     text-align: center;
 }
 
-/* Ajustes para a seção de contato */
 @media screen and (max-width: 768px) {
     .main-content-contact {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        padding: 0 2rem; /* Adiciona padding para as laterais */
+        padding: 0 2rem;
     }
 
     .main-content-contact .inicio-text-content,
@@ -381,7 +394,6 @@ body .full-width {
     }
 }
 
-/* Ajustes gerais para manter margem nas laterais */
 .main-content {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -395,21 +407,105 @@ body .full-width {
 }
 
 @media (max-width: 800px) {
-    .inicio-content {
-        grid-template-columns: 1fr;
-        text-align: center; /* Centraliza o texto */
+    .section-inicio {
+        padding-top: 7rem; /* Ajusta o espaço no topo da seção */
     }
 
-    .inicio-img {
-        display: none; /* Esconde a imagem */
+    .navbar-toggle {
+        top: 1.5rem; /* Ajusta a posição do menu para telas menores */
     }
 
-    .contato-img {
-        display: none; /* Esconde a imagem */
+    h2 {
+        font-size: 2rem;
     }
 
     .inicio-text-content {
-        text-align: center; /* Centraliza o texto */
-        padding: 2rem; /* Adiciona um padding para espaçamento */
+        padding-top: 4rem; /* Ajusta o espaço no topo do texto */
+    }
+
+    .inicio-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .inicio-img {
+        display: none;
+    }
+
+    .contato-img {
+        display: none;
+    }
+
+    .inicio-text-content {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .menu{
+        bottom: 0;
+        text-align: center;
+    }
+
+    .menu-content, .menu-content ul{
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .menu-content{
+        height: 100vh;
+    }
+
+    .menu{
+        display: none;
+    }
+
+    .close-menu {
+        position: fixed;
+        z-index: 1001;
+        top: 2rem;
+        right: 2rem;
+        display: none;
+    }
+
+    .close-menu:checked + .close-menu-label::after {
+        content: '✖';
+    }
+
+    .close-menu-label::after {
+        content: '☰';
+        position: fixed;
+        z-index: 1000;
+        top: 2rem;
+        right: 2rem;
+        background: var(--primary-color);
+        color: var(--white-color);
+        font-size: 3rem;
+        line-height: 3rem;
+        width: 3rem;
+        height: 3rem;
+        text-align: center;
+        padding: 0.7rem;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+
+    .close-menu:checked ~ .menu {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--white-color);
+        z-index: 999;
+        opacity: 0.95;
+    }
+
+    .menu-spacing{
+        display: none;
     }
 }

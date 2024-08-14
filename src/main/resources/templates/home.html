@@ -1,148 +1,147 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
-    <!-- Meta tags Obrigatórias -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Início</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
-          rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap"
+            rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <aside class="menu white-bg">
-        <div class="main-content menu-content">
-            <h1>
-                <a href="#">DOAÇÃO DE PLANTAS</a>
-            </h1>
 
-            <nav>
-                <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Sobre</a></li>
-                    <li><a href="#">Contato</a></li>
-                    <li><a href="#">Login</a></li>
-                </ul>
-            </nav>
-        </div>
-    </aside>
+<input id="close-menu" class="close-menu" type="checkbox" aria-label="Fechar menu" role="button">
+<label class="close-menu-label" for="close-menu" title="Menu"></label>
+<aside class="menu white-bg">
+    <div class="main-content menu-content">
+        <h1 onclick="getElementById('close-menu').checked = false;">
+            <a href="#inicio-web">DOAÇÃO DE PLANTAS</a>
+        </h1>
 
-    <div class="menu-spacing"></div>
+        <nav>
+            <ul onclick="getElementById('close-menu').checked = false;">
+                <li><a href="#inicio-web">Início</a></li>
+                <li><a href="#sobre-web">Sobre</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <li><a href="#login">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+</aside>
 
-    <section class=" inicio main-bg section">
-        <div class="main-content-inicio inicio-content">
-            <div class="inicio-text-content posicao-texto-inicio">
-                <h2>Cadastre-se e adote uma planta</h2>
-                <p>Traga vida ao seu espaço! Inscreva-se e faça parte de uma comunidade que cuida do planeta. Adote uma
-                    planta e
-                    cultive um futuro mais verde.</p>
-                <div class="button-container">
-                    <a href="#" class="button"><span>Cadastre-se</span></a>
-                    <a href="#" class="button login-button"><span>Login</span></a>
-                </div>
+<div class="menu-spacing"></div>
+
+<section id="inicio-web" class=" inicio main-bg section-inicio">
+    <div class="main-content-inicio inicio-content">
+        <div class="inicio-text-content posicao-texto-inicio">
+            <h2>Cadastre-se e adote uma planta</h2>
+            <p>Traga vida ao seu espaço! Inscreva-se e faça parte de uma comunidade que cuida do planeta. Adote uma
+                planta e
+                cultive um futuro mais verde.</p>
+            <div class="button-container">
+                <a href="#" class="button"><span>Cadastre-se</span></a>
+                <a href="#" class="button login-button"><span>Login</span></a>
             </div>
-            <div class="inicio-img">
-                <img src="../img/planta.png" alt="Duas mãos que estão segurando folhas de uma planta">
-            </div>
         </div>
-    </section>
+        <div class="inicio-img">
+            <img src="../img/planta.png" alt="Duas mãos que estão segurando folhas de uma planta">
+        </div>
+    </div>
+</section>
 
-    <section id="sobre-web" class="white-bg section">
-        <div class="main-content sobre-content">
-            <h2>Sobre</h2>
-            <br>
+<section id="sobre-web" class="white-bg section">
+    <div class="main-content sobre-content">
+        <h2>Sobre</h2>
+        <br>
+        <p>
+            Nosso objetivo é conectar pessoas apaixonadas por plantas e dispostas a contribuir para um mundo mais
+            verde.
+            Através de nossa plataforma, você pode adotar plantas de diversas espécies, desde pequenas mudas até
+            árvores
+            já crescidas, todas prontas para trazer um toque de natureza ao seu ambiente.
+        </p>
+        <p>
+            Acreditamos que cada planta faz a diferença. Além de embelezar espaços, elas purificam o ar, aumentam o
+            bem-estar e nos conectam com a natureza. Queremos criar uma rede de doadores e adotantes que
+            compartilhem
+            esse amor pelas plantas e estejam comprometidos em cuidar do meio ambiente.
+        </p>
+        <p>
+            Junte-se a nós e faça parte dessa comunidade. Juntos, podemos cultivar um futuro mais verde e
+            sustentável.
+        </p>
+    </div>
+</section>
+
+<section id="contact" class="inicio main-bg section">
+    <div class="main-content-contact inicio-content">
+        <div class="inicio-text-content">
+            <h2>Fale Comigo</h2>
             <p>
-                Nosso objetivo é conectar pessoas apaixonadas por plantas e dispostas a contribuir para um mundo mais
-                verde.
-                Através de nossa plataforma, você pode adotar plantas de diversas espécies, desde pequenas mudas até
-                árvores
-                já crescidas, todas prontas para trazer um toque de natureza ao seu ambiente.
-            </p>
-            <p>
-                Acreditamos que cada planta faz a diferença. Além de embelezar espaços, elas purificam o ar, aumentam o
-                bem-estar e nos conectam com a natureza. Queremos criar uma rede de doadores e adotantes que
-                compartilhem
-                esse amor pelas plantas e estejam comprometidos em cuidar do meio ambiente.
-            </p>
-            <p>
-                Junte-se a nós e faça parte dessa comunidade. Juntos, podemos cultivar um futuro mais verde e
+                Estamos aqui para ajudar você a encontrar a planta ideal para adotar ou tirar dúvidas sobre o
+                processo de doação.
+                Se precisar de mais informações, sugestões ou quiser compartilhar sua experiência conosco, preencha
+                o formulário
+                abaixo. Queremos ouvir você e colaborar para que juntos possamos criar um ambiente mais verde e
                 sustentável.
             </p>
         </div>
-    </section>
-
-    <section id="contact" class="inicio main-bg section">
-        <div class="main-content-contact inicio-content">
-            <div class="inicio-text-content">
-                <h2>Fale Comigo</h2>
-                <p>
-                    Estamos aqui para ajudar você a encontrar a planta ideal para adotar ou tirar dúvidas sobre o processo de doação.
-                    Se precisar de mais informações, sugestões ou quiser compartilhar sua experiência conosco, preencha o formulário
-                    abaixo. Queremos ouvir você e colaborar para que juntos possamos criar um ambiente mais verde e sustentável.
-                </p>
-            </div>
-            <div class="contato-img">
-                <img src="../img/img-contato.svg" alt="Logo de HTML, CSS e JS.">
-            </div>
-            <div class="contact-form">
+        <div class="contato-img">
+            <img src="../img/img-contato.svg" alt="Logo de HTML, CSS e JS.">
+        </div>
+        <div class="contact-form">
+            <form class="contact-form" action="https://api.staticforms.xyz/submit" method="POST">
+                <input type="hidden" name="accessKey" value="API_KEY">
+                <!-- Aqui é a parte de redirecionamento, após o envio do email -->
+                <input type="hidden" name="redirecTo" value="#inicio-web">
                 <fieldset class="form-grid">
                     <div class="form-group">
                         <label for="first-name">Nome</label>
-                        <input type="text" name="first-name" id="first-name">
+                        <input type="text" name="first-name" id="first-name" autocomplete="off" required>
                     </div>
 
                     <div class="form-group">
                         <label for="last-name">Sobrenome</label>
-                        <input type="text" name="last-name" id="last-name">
+                        <input type="text" name="last-name" id="last-name" autocomplete="off" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">E-mail</label>
-                        <input type="email" name="email" id="email">
+                        <input type="email" name="email" id="email" autocomplete="off" required>
                     </div>
 
                     <div class="form-group full-width">
                         <label for="message">Mensagem</label>
-                        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                        <textarea name="message" id="message" cols="30" rows="10" autocomplete="off" required></textarea>
                     </div>
 
                     <div class="form-group full-width">
                         <button type="submit">Enviar Mensagem</button>
                     </div>
                 </fieldset>
-            </div>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
-    </section>
+</section>
 
-    <footer id="footer" class="footer white-bg">
-        <p class="footer">Copyright
-            <script>document.write(new Date().getFullYear())</script> &copy; <a href="https://pedrolima.tech/" target="_blank">Pedro Lima</a>
-        </p>
-    </footer>
+<footer id="footer" class="footer white-bg">
+    <div class="row align-items-center">
+        <div class="col-sm-6">
+            <p>Copyright
+                <script>document.write(new Date().getFullYear())</script> &copy; <a href="https://pedrolima.tech/"
+                                                                                    target="_blank">Pedro Lima</a>
+            </p>
+        </div>
+    </div>
+</footer>
 
-
-
-<script src="js/mobile-navbar.js"></script>
-    <!-- JavaScript (Opcional) -->
-    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-    <script src="../js/effectButton.js"></script>
+<script src="../js/effectButton.js"></script>
 </body>
+
 </html>
