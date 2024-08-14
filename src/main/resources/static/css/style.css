@@ -19,7 +19,6 @@ html{
 }
 
 body{
-    overflow-x: hidden;
     font-family: 'Open Sans', sans-serif;
     font-size: 2rem;
     color: var(-primary-color);
@@ -221,6 +220,7 @@ body .full-width {
 }
 
 .contato-img{
+    width: auto;
 }
 
 .sobre-content{
@@ -281,30 +281,72 @@ body .full-width {
     color: var(--primary-color);
 }
 
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.footer{
     text-align: center;
-    padding: 1rem; /* Aumente o valor conforme necessário */
-    background-color: var(--white-color); /* Confirma o fundo branco */
 }
 
-.footer .row {
-    margin: 0;
-}
-
-.footer .col-sm-6 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer p {
-    display: flex;
-    align-items: center;
-    margin: 0;
+.footer p{
     color: black;
+}
+
+/* Botao */
+.button-container {
+    display: flex; /* Usa Flexbox para alinhar os botões horizontalmente */
+    gap: 10px; /* Espaço entre os botões */
+}
+
+/* Botão Login */
+.login-button {
+    background-color: #4CAF50;
+    margin-left: 10px;
+}
+
+.button {
+    margin-left: 25px;
+    display: inline-block;
+    background-color: #6B8E23 ;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 120px;
+    font-size: 16px;
+    margin-top: 20px;
+    max-width: 200px;
+    width: 100%;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.button span {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    position: relative;
+    z-index: 999999;
+}
+
+.button::before{
+    content: '';
+    background-color: #3CB371;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: var(--eixoY);
+    left: var(--eixoX);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width .5s, height .5s;
+}
+
+.button:hover::before{
+    width: 1000px;
+    height: 1000px;
+}
+
+.inicio-text-content {
+    text-align: center;
 }
 
 /* Ajustes para a seção de contato */
