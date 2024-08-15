@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+public class Cadastro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

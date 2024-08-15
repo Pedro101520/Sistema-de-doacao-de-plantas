@@ -363,7 +363,7 @@ body .full-width {
     text-align: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
     .main-content-contact {
         flex-direction: column;
         align-items: center;
@@ -407,6 +407,13 @@ body .full-width {
 }
 
 @media (max-width: 800px) {
+    .inicio-text-content h2 {
+        font-size: 4rem; /* Reduz o tamanho da fonte para telas menores */
+        line-height: 1.1; /* Ajusta o espaçamento entre linhas */
+        word-break: break-word; /* Quebra as palavras longas para evitar estouro */
+    }
+
+    /* Outros ajustes já existentes para telas menores */
     .section-inicio {
         padding-top: 7rem; /* Ajusta o espaço no topo da seção */
     }
@@ -441,21 +448,21 @@ body .full-width {
         padding: 2rem;
     }
 
-    .menu{
+    .menu {
         bottom: 0;
         text-align: center;
     }
 
-    .menu-content, .menu-content ul{
+    .menu-content, .menu-content ul {
         flex-direction: column;
         justify-content: center;
     }
 
-    .menu-content{
+    .menu-content {
         height: 100vh;
     }
 
-    .menu{
+    .menu {
         display: none;
     }
 
@@ -505,7 +512,7 @@ body .full-width {
         opacity: 0.95;
     }
 
-    .menu-spacing{
+    .menu-spacing {
         display: none;
     }
 }
