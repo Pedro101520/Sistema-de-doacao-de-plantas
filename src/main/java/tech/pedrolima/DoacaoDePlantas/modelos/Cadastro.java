@@ -17,7 +17,7 @@ public class Cadastro implements Serializable {
     private String sobrenome;
     private String email;
     private String telefone;
-    private String CEP;
+    private String cep;
     private String rua;
     private String bairro;
     private String numero;
@@ -32,11 +32,11 @@ public class Cadastro implements Serializable {
         this.id = id;
     }
 
-    private void setSenha(String senha){
+    public void setSenha(String senha){
         this.senha = senha;
     }
 
-    private String getSenha(){
+    public String getSenha(){
         return senha;
     }
 
@@ -73,11 +73,11 @@ public class Cadastro implements Serializable {
     }
 
     public String getCEP() {
-        return CEP;
+        return cep;
     }
 
     public void setCEP(String CEP) {
-        this.CEP = CEP;
+        this.cep = CEP;
     }
 
     public String getRua() {

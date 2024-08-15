@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,51 +14,51 @@
 <div class="BottomrightBackground"></div>
 <div class="cadastro-container">
     <h2>Cadastro</h2>
-    <form action="cadastro" method="POST">
+    <form action="/cadastrarUsuario" th:object="${usuario}" method="POST">
         <div class="form-grid">
             <div class="input-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" required>
+                <input type="text" id="nome" name="nome" required th:field="*{nome}">
             </div>
             <div class="input-group">
                 <label for="sobrenome">Sobrenome</label>
-                <input type="text" id="sobrenome" name="sobrenome" required>
+                <input type="text" id="sobrenome" name="sobrenome" required th:field="*{sobrenome}">
             </div>
             <div class="input-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required th:field="*{email}">
             </div>
             <div class="input-group">
                 <label for="telefone">Telefone</label>
-                <input type="text" id="telefone" name="telefone" required>
+                <input type="text" id="telefone" name="telefone" required th:field="*{telefone}">
             </div>
             <div class="input-group">
                 <label for="cep">CEP</label>
-                <input type="text" id="cep" name="cep" required>
+                <input type="text" id="cep" name="cep" required th:field="*{CEP}">
             </div>
             <div class="input-group">
                 <label for="rua">Rua</label>
-                <input type="text" id="rua" name="rua" required>
+                <input type="text" id="rua" name="rua" required th:field="*{rua}">
             </div>
             <div class="input-group">
                 <label for="bairro">Bairro</label>
-                <input type="text" id="bairro" name="bairro" required>
+                <input type="text" id="bairro" name="bairro" required th:field="*{bairro}">
             </div>
             <div class="input-group">
                 <label for="numero">Número</label>
-                <input type="text" id="numero" name="numero" required>
+                <input type="text" id="numero" name="numero" required th:field="*{numero}">
             </div>
             <div class="input-group">
                 <label for="cidade">Cidade</label>
-                <input type="text" id="cidade" name="cidade" required>
+                <input type="text" id="cidade" name="cidade" required th:field="*{cidade}">
             </div>
             <div class="input-group">
                 <label for="estado">Estado</label>
-                <input type="text" id="estado" name="estado" required>
+                <input type="text" id="estado" name="estado" required th:field="*{estado}">
             </div>
             <div class="input-group">
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" required>
+                <input type="password" id="senha" name="senha" required th:field="*{senha}">
             </div>
         </div>
         <button type="submit">Cadastrar</button>
