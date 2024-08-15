@@ -12,6 +12,7 @@ public class Cadastro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String senha;
     private String nome;
     private String sobrenome;
     private String email;
@@ -29,6 +30,14 @@ public class Cadastro implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    private void setSenha(String senha){
+        this.senha = senha;
+    }
+
+    private String getSenha(){
+        return senha;
     }
 
     public String getNome() {
