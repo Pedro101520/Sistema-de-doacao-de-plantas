@@ -47,6 +47,12 @@ body {
     z-index: -1;
 }
 
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
 .login-container {
     background-color: #fff;
     padding: 20px;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,14 +12,17 @@
 <div class="BottomrightBackground"></div>
 <div class="login-container">
     <h2>Login</h2>
-    <form action="login" method="POST">
+    <form action="/logar" method="POST">
         <div class="input-group">
-            <label for="username">E-mail</label>
-            <input type="text" id="username" name="username" required>
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" required>
         </div>
         <div class="input-group">
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password" required>
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required>
+        </div>
+        <div th:if="${erro}" class="error-message">
+            <p th:text="${erro}"></p>
         </div>
         <button type="submit">Entrar</button>
         <p><a href="#">Esqueceu a senha?</a></p>
