@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -31,6 +31,16 @@
         </nav>
     </div>
 </aside>
+
+<section>
+    <br><br><br><br>
+    <form action="/cadastrarImagem" enctype="multipart/form-data" th:object="${planta}" method="POST">
+        <div>
+            <input type="file" name="file">
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+</section>
 </body>
 
 </html>
