@@ -20,14 +20,14 @@ import java.nio.file.Paths;
 @Controller
 public class PlantaControle {
 
-    private static String caminhoImagens = "/home/pedro/Documentos/ImagensPlanta";
+    private static String caminhoImagens = "/home/pedro/Documentos/ImagensPlanta/";
 
     @Autowired
     private PlantaRepositorio plantaRepositorio;
 
     @GetMapping("/cadastroPlanta")
     public ModelAndView cadastrar(Planta planta) {
-        ModelAndView mv = new ModelAndView("logins/login");
+        ModelAndView mv = new ModelAndView("pages/MainScreen");
         mv.addObject("planta", planta);
         return mv;
     }
@@ -35,29 +35,32 @@ public class PlantaControle {
     @PostMapping("/cadastrarImagem")
     public ModelAndView salvar(@Valid Planta planta, BindingResult result,
                                @RequestParam("file") MultipartFile arquivo) {
-//        if (result.hasErrors()) {
-//            return cadastrar(planta);
-//        }
+        if (result.hasErrors()) {
+            return cadastrar(planta);
+        }
 
         plantaRepositorio.saveAndFlush(planta);
 
         try {
             if (!arquivo.isEmpty()) {
+                String nomeOriginal = arquivo.getOriginalFilename();
+                String extensao = nomeOriginal.substring(nomeOriginal.lastIndexOf("."));
+                String prefixo = planta.getId().toString();
+                String nomeModificado = prefixo + nomeOriginal.replaceAll("\\s", "_");
+                Path caminho = Paths.get(caminhoImagens + nomeModificado);
                 byte[] bytes = arquivo.getBytes();
-                Path caminho = Paths.get(caminhoImagens + String.valueOf(planta.getId()) + arquivo.getOriginalFilename());
                 Files.write(caminho, bytes);
 
-                //Aqui estou salvando o do arquivo da imagem no banco de dados
-                //Assim que se salva informações no banco de dados usando Spring Boot
-                planta.setCaminhoImg(String.valueOf(planta.getId()) + arquivo.getOriginalFilename());
-
-                System.out.println("Sucesso");
+                planta.setCaminhoImg(nomeModificado);
             }
+
+            //Aqui salva o nome do arquivo no banco de dados
+            plantaRepositorio.saveAndFlush(planta);
+
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Falha");
         }
 
-        return new ModelAndView("redirect:/cadastroPlanta"); // Redirecionando após salvar
+        return new ModelAndView("redirect:/cadastroPlanta");
     }
 }
