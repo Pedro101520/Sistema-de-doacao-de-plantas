@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Doar Planta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Login</title>
+    <link rel="stylesheet" href="../../css/doarPlanta.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+<div class="TopleftBackground"></div>
+<div class="BottomrightBackground"></div>
+<div class="login-container">
+    <h2>Cadastrar Planta</h2>
     <section>
-        <br><br><br><br>
         <form action="/cadastrarImagem" enctype="multipart/form-data" th:object="${planta}" method="POST">
             <div>
                 <input type="file" name="file">
             </div>
+            <br>
             <div class="input-group">
                 <label for="nome">Nome</label>
                 <input type="text" id="nome" name="nome" required th:field="*{nome}">
             </div>
             <div class="input-group">
                 <label for="descricao">Descrição</label>
-                <input type="text" id="descricao" name="descricao" required th:field="*{descricao}">
+                <textarea name="message" id="descricao" cols="30" rows="10" autocomplete="off" required th:field="*{descricao}"></textarea>
             </div>
             <button type="submit">Enviar</button>
         </form>
     </section>
+</div>
 </body>
 </html>
