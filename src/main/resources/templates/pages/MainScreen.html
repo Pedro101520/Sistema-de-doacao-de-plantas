@@ -41,6 +41,18 @@
         <button type="submit">Enviar</button>
     </form>
 </section>
+<table>
+    <thead>
+    <tr>
+        <th>Imagem</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="planta : ${plantas}">
+        <td><img th:src="@{/cadastroPlanta/plantasDisponiveis/{imagem}(imagem=${planta.caminhoImg})}" width="100"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 
 </html>
