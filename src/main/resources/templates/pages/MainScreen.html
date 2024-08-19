@@ -23,33 +23,37 @@
 
         <nav>
             <ul onclick="getElementById('close-menu').checked = false;">
-                <li><a href="#inicio-web">Início</a></li>
-                <li><a href="#sobre-web">Sobre</a></li>
-                <li><a href="#contact">Contato</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="#inicio-web">Adotar Plantas</a></li>
+                <li><a href="/doarPlanta">Doar Plantas</a></li>
+                <li><a href="#contact">Atualizar Dados</a></li>
+                <li><a href="login.html">Logout</a></li>
             </ul>
         </nav>
     </div>
 </aside>
 
-<section>
-    <br><br><br><br>
-    <form action="/cadastrarImagem" enctype="multipart/form-data" th:object="${planta}" method="POST">
-        <div>
-            <input type="file" name="file">
-        </div>
-        <button type="submit">Enviar</button>
-    </form>
-</section>
 <table>
     <thead>
     <tr>
-        <th>Imagem</th>
+        <th>Plantas para doação</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="planta : ${plantas}">
-        <td><img th:src="@{/cadastroPlanta/plantasDisponiveis/{imagem}(imagem=${planta.caminhoImg})}" width="100"></td>
+    <tr th:each="planta : ${listaImagens}">
+        <td>
+            <div class="plant-card">
+                <img th:src="@{/listagemDePlantas/plantasDisponiveis/{imagem}(imagem=${planta.caminhoImg})}" alt="Imagem da planta">
+                <h2 th:text="${planta.nome}"></h2>
+                <p th:text="${planta.descricao}"></p>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+    <tbody>
+    <tr th:each="usuario : ${listaNomes}">
+        <td>
+            <h2 th:text="${usuario.nome}"></h2>
+        </td>
     </tr>
     </tbody>
 </table>

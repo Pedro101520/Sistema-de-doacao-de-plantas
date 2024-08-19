@@ -28,7 +28,13 @@ public class PlantaControle {
     public ModelAndView cadastrar(Planta planta) {
         ModelAndView mv = new ModelAndView("pages/MainScreen");
         mv.addObject("planta", planta);
-        mv.addObject("plantas", plantaRepositorio.findAll());
+        return mv;
+    }
+
+    @GetMapping("/listagemDePlantas")
+    public ModelAndView listar(Planta planta) {
+        ModelAndView mv = new ModelAndView("pages/MainScreen");
+        mv.addObject("listaImagens", plantaRepositorio.findAll());
         return mv;
     }
 
@@ -61,11 +67,10 @@ public class PlantaControle {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return new ModelAndView("redirect:/cadastroPlanta");
+        return new ModelAndView("redirect:/listagemDePlantas");
     }
 
-    @GetMapping("/cadastroPlanta/plantasDisponiveis/{imagem}")
+    @GetMapping("/listagemDePlantas/plantasDisponiveis/{imagem}")
     @ResponseBody
     public byte[] retornarImagem(@PathVariable("imagem") String imagem) throws Exception{
         File imagemArquivo = new File(caminhoImagens + imagem);

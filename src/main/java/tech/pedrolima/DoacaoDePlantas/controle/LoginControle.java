@@ -28,7 +28,7 @@ public class LoginControle {
         //Estou acessando os dados do banco de dados
         Cadastro cad = this.cadastroRepositorio.login(cadParam.getEmail(), cadParam.getSenha());
         if(cad != null){
-            return "pages/MainScreen";
+            return "redirect:/listagemDePlantas";
         }
         model.addAttribute("erro", "Usuário ou senha inválidos");
         return "logins/login";

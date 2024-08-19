@@ -24,7 +24,7 @@ body{
     color: var(-primary-color);
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, th{
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -142,6 +142,11 @@ body .full-width {
     transition: all 300ms ease-in-out;
 }
 
+.th {
+    font-size: 5rem;
+    color: var(--primary-color);
+}
+
 .menu ul li a:hover::after{
     width: 50%;
     left: 25%;
@@ -224,3 +229,81 @@ body .full-width {
         display: none;
     }
 }
+
+/* Estilo para o layout de grid das imagens */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tbody {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+}
+
+td {
+    padding: 0.5rem;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 1400px) {
+    tbody {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 1200px) {
+    tbody {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 800px) {
+    tbody {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    tbody {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    }
+}
+
+
+.plant-card {
+    text-align: center;
+}
+
+.plant-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.plant-card h2 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+    color: var(--primary-color);
+}
+
+.plant-card p {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+}
+
+thead th {
+    padding-top: 7rem;
+    padding-bottom: 5rem;
+    color: var(--primary-color);
+    font-size: 4rem;
+}
+
+
