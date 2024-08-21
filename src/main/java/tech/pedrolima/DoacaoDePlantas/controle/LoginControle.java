@@ -22,15 +22,15 @@ public class LoginControle {
         return mv;
     }
 
-    @PostMapping("/logar")
-    //Aqui estou criando uma variavel do tipo Cadastro (classe modelo) para armazenar as informações de login
-    public String logar(Model model, Cadastro cadParam){
-        //Estou acessando os dados do banco de dados
-        Cadastro cad = this.cadastroRepositorio.login(cadParam.getEmail(), cadParam.getSenha());
-        if(cad != null){
-            return "redirect:/listagemDePlantas";
-        }
-        model.addAttribute("erro", "Usuário ou senha inválidos");
-        return "logins/login";
-    }
+//    @PostMapping("/logar")
+//    //Aqui estou criando uma variavel do tipo Cadastro (classe modelo) para armazenar as informações de login
+//    public String logar(Model model, Cadastro cadParam){
+//        //Estou acessando os dados do banco de dados
+//        Cadastro cad = this.cadastroRepositorio.login(cadParam.getEmail(), cadParam.getSenha());
+//        if(cad != null){
+//            return "redirect:/listagemDePlantas";
+//        }
+//        model.addAttribute("erro", "Usuário ou senha inválidos");
+//        return "logins/login";
+//    }
 }
