@@ -15,6 +15,7 @@
 <div class="cadastro-container">
     <h2>Cadastro</h2>
     <form action="/cadastrarUsuario" th:object="${usuario}" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="form-grid">
             <div class="input-group">
                 <label for="nome">Nome</label>

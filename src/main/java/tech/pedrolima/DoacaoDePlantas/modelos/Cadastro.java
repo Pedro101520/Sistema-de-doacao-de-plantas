@@ -1,18 +1,12 @@
 package tech.pedrolima.DoacaoDePlantas.modelos;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import tech.pedrolima.DoacaoDePlantas.controle.UserRole;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "usuario")
-public class Cadastro implements Serializable ,UserDetails {
+public class Cadastro implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -29,15 +23,6 @@ public class Cadastro implements Serializable ,UserDetails {
     private String numero;
     private String cidade;
     private String estado;
-    private UserRole role;
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
 
     public Long getId() {
         return id;
@@ -133,43 +118,5 @@ public class Cadastro implements Serializable ,UserDetails {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public String getPassword() {
-        return senha;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

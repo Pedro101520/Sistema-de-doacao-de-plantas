@@ -1,7 +1,7 @@
 package tech.pedrolima.DoacaoDePlantas.controle;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +16,9 @@ public class CadastroControle {
     @Autowired
     private CadastroRepositorio cadastroRepositorio;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("/cadastroUsuario")
     public ModelAndView cadastrar(Cadastro usuario){
         ModelAndView mv = new ModelAndView("cadastros/cadastro");
@@ -29,6 +32,7 @@ public class CadastroControle {
         if(result.hasErrors()){
             return cadastrar(cadastro);
         }
+        cadastro.setSenha(passwordEncoder.encode(cadastro.getSenha()));
         cadastroRepositorio.saveAndFlush(cadastro);
         return cadastrar(new Cadastro());
     }

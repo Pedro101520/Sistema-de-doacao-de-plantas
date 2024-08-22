@@ -12,14 +12,15 @@
 <div class="BottomrightBackground"></div>
 <div class="login-container">
     <h2>Login</h2>
-    <form action="/logar" method="POST">
+    <form action="/login" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="input-group">
-            <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" required>
+            <label for="username">E-mail</label>
+            <input type="text" id="username" name="username" required>
         </div>
         <div class="input-group">
-            <label for="senha">Senha</label>
-            <input type="password" id="senha" name="senha" required>
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password" required>
         </div>
         <div th:if="${erro}" class="error-message">
             <p th:text="${erro}"></p>
