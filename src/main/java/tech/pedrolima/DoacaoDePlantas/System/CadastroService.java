@@ -15,11 +15,18 @@ public class CadastroService implements UserDetailsService {
     @Autowired
     private CadastroRepositorio cadastroRepositorio;
 
+    private Long idByEmail;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Cadastro cadastro = cadastroRepositorio.findByEmail(email);
 
+//        System.out.println(cadastro.getId());
+
         if(cadastro != null){
+            setIdByEmail(cadastro.getId());
+            idByEmail = cadastro.getId();
+
             var springUser = User.withUsername(cadastro.getEmail())
                     .password(cadastro.getSenha())
                     .build();
@@ -27,5 +34,13 @@ public class CadastroService implements UserDetailsService {
             return springUser;
         }
         return null;
+    }
+
+    public void setIdByEmail(Long idByEmail){
+        this.idByEmail = idByEmail;
+    }
+
+    public Long getIdByEmail(){
+        return idByEmail;
     }
 }

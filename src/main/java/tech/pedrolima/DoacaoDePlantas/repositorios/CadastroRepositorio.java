@@ -10,9 +10,8 @@ import java.util.Optional;
 
 public interface CadastroRepositorio extends JpaRepository<Cadastro, Long> {
 
-//    @Query(value = "SELECT * FROM usuario WHERE email = :email AND senha = :senha", nativeQuery = true)
-//    public Cadastro login(String email, String senha);
+//    @Query(value = "SELECT id FROM usuario WHERE email = :email", nativeQuery = true)
+//    Long findIdByEmail(@Param("email") String email);
 
     public Cadastro findByEmail(String email);
-
 }

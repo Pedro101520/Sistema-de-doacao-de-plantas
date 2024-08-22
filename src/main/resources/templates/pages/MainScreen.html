@@ -25,7 +25,7 @@
             <ul onclick="getElementById('close-menu').checked = false;">
                 <li><a href="#inicio-web">Adotar Plantas</a></li>
                 <li><a href="/doarPlanta">Doar Plantas</a></li>
-                <li><a href="#contact">Atualizar Dados</a></li>
+                <li><a th:href="@{/editarUsuario/{id}(id=${usuarioId})}">Atualizar Dados</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>

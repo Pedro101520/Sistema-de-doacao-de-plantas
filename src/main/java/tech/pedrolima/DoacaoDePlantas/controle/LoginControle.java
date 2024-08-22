@@ -19,8 +19,10 @@ public class LoginControle {
     @GetMapping("/login")
     public ModelAndView cadastrar(){
         ModelAndView mv = new ModelAndView("logins/login");
+        Cadastro cad = new Cadastro();
         return mv;
     }
+
 
 //    @PostMapping("/logar")
 //    //Aqui estou criando uma variavel do tipo Cadastro (classe modelo) para armazenar as informações de login
