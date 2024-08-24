@@ -29,14 +29,8 @@ public class CadastroControle {
     @GetMapping("/cadastroUsuario")
     public ModelAndView cadastrar(Cadastro usuario){
         ModelAndView mv = new ModelAndView("cadastros/cadastro");
-        mv.addObject("usuarioId", cadastroService.getIdByEmail());
+        mv.addObject("usuario", usuario);
         mv.addObject("listaNomes", cadastroRepositorio.findAll());
-
-//        Long userId = cadastroRepositorio.findByEmail(email).getId();
-        Long userId = cadastroService.getIdByEmail();
-        System.out.println("aaaaaaaaaaaaaaaaaaaa" + userId);
-        mv.addObject("usuarioId", userId);
-
         return mv;
     }
 

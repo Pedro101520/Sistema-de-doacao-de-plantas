@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import tech.pedrolima.DoacaoDePlantas.System.CadastroService;
 import tech.pedrolima.DoacaoDePlantas.modelos.Planta;
 import tech.pedrolima.DoacaoDePlantas.repositorios.PlantaRepositorio;
 
@@ -24,6 +25,9 @@ public class PlantaControle {
     @Autowired
     private PlantaRepositorio plantaRepositorio;
 
+    @Autowired
+    private CadastroService cadastroService;
+
     @GetMapping("/cadastroPlanta")
     public ModelAndView cadastrar(Planta planta) {
         ModelAndView mv = new ModelAndView("pages/MainScreen");
@@ -35,6 +39,9 @@ public class PlantaControle {
     public ModelAndView listar(Planta planta) {
         ModelAndView mv = new ModelAndView("pages/MainScreen");
         mv.addObject("listaImagens", plantaRepositorio.findAll());
+        Long userId = cadastroService.getIdByEmail();
+        mv.addObject("userId", userId);
+        System.out.println(userId + "PlantaControle.java");
         return mv;
     }
 
