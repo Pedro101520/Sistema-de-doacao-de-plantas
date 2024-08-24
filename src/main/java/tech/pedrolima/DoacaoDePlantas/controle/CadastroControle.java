@@ -48,7 +48,7 @@ public class CadastroControle {
     public ModelAndView editar(@PathVariable("id") Long id){
         Long userId = cadastroService.getIdByEmail();
         if (!id.equals(userId)) {
-            return new ModelAndView("redirect:/inicio");
+            return new ModelAndView("redirect:/aviso");
         }
         Optional<Cadastro> cadastro = cadastroRepositorio.findById(id);
         return cadastrar(cadastro.get());
