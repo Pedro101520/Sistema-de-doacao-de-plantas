@@ -40,8 +40,9 @@ public class PlantaControle {
         ModelAndView mv = new ModelAndView("pages/MainScreen");
         mv.addObject("listaImagens", plantaRepositorio.findAll());
         Long userId = cadastroService.getIdByEmail();
+        //Mesmo estando em uma classe diferente da qual o /editar está, o thymeleaf copnsegue reconhecer o userId
+        //Pois, estou adicionanod o userId ao objeto
         mv.addObject("userId", userId);
-        System.out.println(userId + "PlantaControle.java");
         return mv;
     }
 
