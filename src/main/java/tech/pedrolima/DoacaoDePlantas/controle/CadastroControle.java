@@ -62,6 +62,14 @@ public class CadastroControle {
         return cadastrar(new Cadastro());
     }
 
+    @GetMapping("/atualizacaoDados")
+    public ModelAndView atualizar(Cadastro usuario){
+        ModelAndView mv = new ModelAndView("pages/atualizacaoDeDados");
+        mv.addObject("usuario", usuario);
+        mv.addObject("listaNomes", cadastroRepositorio.findAll());
+        return mv;
+    }
+
     @GetMapping("/editarUsuario/{id}")
     public ModelAndView editar(@PathVariable("id") Long id){
         Long userId = cadastroService.getIdByEmail();
@@ -69,6 +77,6 @@ public class CadastroControle {
             return new ModelAndView("redirect:/aviso");
         }
         Optional<Cadastro> cadastro = cadastroRepositorio.findById(id);
-        return cadastrar(cadastro.get());
+        return atualizar(cadastro.get());
     }
 }
