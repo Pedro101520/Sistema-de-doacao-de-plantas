@@ -35,12 +35,30 @@ public class CadastroControle {
     }
 
     @PostMapping("/cadastrarUsuario")
-    public ModelAndView salvar(Cadastro cadastro, BindingResult result){
-        if(result.hasErrors()){
+    public ModelAndView salvar(Cadastro cadastro, BindingResult result) {
+        if (result.hasErrors()) {
             return cadastrar(cadastro);
         }
-        cadastro.setSenha(passwordEncoder.encode(cadastro.getSenha()));
-        cadastroRepositorio.saveAndFlush(cadastro);
+
+        Long userId = cadastroService.getIdByEmail();
+
+        if (userId != null) {
+            Optional<Cadastro> cadastroExistente = cadastroRepositorio.findById(userId);
+
+            if (cadastroExistente.isPresent()) {
+                Cadastro cadastroAtualizado = cadastroExistente.get();
+                cadastroAtualizado.setNome(cadastro.getNome());
+                cadastroAtualizado.setEmail(cadastro.getEmail());
+                cadastroAtualizado.setSenha(passwordEncoder.encode(cadastro.getSenha()));
+                cadastroRepositorio.saveAndFlush(cadastroAtualizado);
+            } else {
+                return new ModelAndView("erro", "mensagem", "Cadastro não encontrado.");
+            }
+        } else {
+            cadastro.setSenha(passwordEncoder.encode(cadastro.getSenha()));
+            cadastroRepositorio.saveAndFlush(cadastro);
+        }
+
         return cadastrar(new Cadastro());
     }
 

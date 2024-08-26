@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -32,10 +33,11 @@ public class SecurityConfig {
                         .permitAll()
                 )
                 .logout(config -> config
-                        .logoutUrl("/logout")  // URL do logout
-                        .logoutSuccessUrl("/inicio")  // Redirecionar após o logout
-                        .invalidateHttpSession(true)  // Invalida a sessão HTTP
-                        .deleteCookies("JSESSIONID")  // Exclui os cookies de sessão
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/inicio")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                 )
                 .build();
     }
