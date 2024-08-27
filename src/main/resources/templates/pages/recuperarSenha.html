@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Login</title>
+  <link rel="stylesheet" href="../../css/login.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<div class="TopleftBackground"></div>
+<div class="BottomrightBackground"></div>
+<div class="login-container">
+  <h2>Recuperação de senha</h2>
+  <form action="/recuperarSenha/informarEmail" method="GET">
+    <div class="input-group">
+      <label for="username">E-mail</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <button type="submit">Enviar Código de Recuperação</button>
+  </form>
+</div>
+</body>
+</html>

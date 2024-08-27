@@ -20,6 +20,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/cadastroUsuario").permitAll()
+                        .requestMatchers("/recuperarSenha/informarEmail").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cadastrarUsuario").permitAll()
                         .requestMatchers("/", "/css/**", "/img/**", "/js/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/logar").permitAll()
