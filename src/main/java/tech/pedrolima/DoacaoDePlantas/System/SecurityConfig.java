@@ -20,11 +20,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/cadastroUsuario").permitAll()
-                        .requestMatchers("/recuperarSenha/informarEmail").permitAll()
                         .requestMatchers(HttpMethod.POST, "/cadastrarUsuario").permitAll()
                         .requestMatchers("/", "/css/**", "/img/**", "/js/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/logar").permitAll()
                         .requestMatchers("/inicio").permitAll()
+                        .requestMatchers("/recuperarSenha").permitAll()
+                        .requestMatchers("/recuperarSenha/informarEmail").permitAll()
+                        .requestMatchers("/recuperarSenha/informarEmail/atualizarSenha").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

@@ -17,14 +17,14 @@
 <aside class="menu white-bg">
     <div class="main-content menu-content">
         <h1 onclick="getElementById('close-menu').checked = false;">
-            <a href="#inicio-web">DOAÇÃO DE PLANTAS</a>
+            <a href="/inicio">DOAÇÃO DE PLANTAS</a>
         </h1>
 
         <nav>
             <ul onclick="getElementById('close-menu').checked = false;">
                 <li><a href="/listagemDePlantas">Adotar Plantas</a></li>
                 <li><a href="/doarPlanta">Doar Plantas</a></li>
-                <li><a th:href="@{/editarUsuario/{id}(id=${userId})}">Atualizar Dados</a></li>
+                <li><a href="#atualizar">Atualizar Dados</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </nav>
