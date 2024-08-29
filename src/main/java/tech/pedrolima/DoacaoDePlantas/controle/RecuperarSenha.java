@@ -41,9 +41,20 @@ public class RecuperarSenha {
     }
 
     @GetMapping("/recuperarSenha/informarEmail/atualizarSenha")
-    public ModelAndView atualizar(Cadastro usuario){
-        ModelAndView mv = new ModelAndView("pages/senhaAtualizar");
-        mv.addObject("usuario", usuario);
+    public ModelAndView informarCodigo(@RequestParam("code") int codigo, Cadastro usuario){
+
+        ModelAndView mv;
+
+        System.out.println(codigo);
+
+        if(codigo == envioEmail.getCodigo()) {
+            mv = new ModelAndView("pages/senhaAtualizar");
+            mv.addObject("usuario", usuario);
+        }else{
+            mv = new ModelAndView("pages/senhaAtualizar");
+            System.out.println("Código inválido");
+        }
+
         return mv;
     }
 

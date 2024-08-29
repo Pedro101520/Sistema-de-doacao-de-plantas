@@ -19,9 +19,11 @@ public class EnvioEmail {
     @Value("${spring.mail.username}")
     private String remetente;
 
+    private int randomNumber;
+
     public void imprimir(String email){
         Random random = new Random();
-        int randomNumber = 10000 + random.nextInt(90000);
+        randomNumber = 10000 + random.nextInt(90000);
 
         String assunto = "Redefinição de senha";
 
@@ -36,13 +38,19 @@ public class EnvioEmail {
             simpleMailMessage.setSubject(assunto);
             simpleMailMessage.setText(mensagem);
             javaMailSender.send(simpleMailMessage);
+            setCodigo(randomNumber);
             System.out.println("Email enviado");
         }catch (Exception e){
             System.out.println("Erro ao enviar");
         }
+    }
 
-        System.out.println(email);
-        System.out.println(randomNumber);
+    public int getCodigo(){
+        return randomNumber;
+    }
+
+    public void  setCodigo(int codigo){
+        randomNumber = codigo;
     }
 
 }
