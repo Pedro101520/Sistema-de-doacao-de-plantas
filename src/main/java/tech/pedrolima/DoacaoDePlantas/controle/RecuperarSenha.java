@@ -18,6 +18,8 @@ public class RecuperarSenha {
     @Autowired
     private EnvioEmail envioEmail;
 
+    private static int tentativas = 0;
+
     @GetMapping("/recuperarSenha")
     public ModelAndView recuperar(){
         ModelAndView mv = new ModelAndView("pages/recuperarSenha");
@@ -50,9 +52,15 @@ public class RecuperarSenha {
         if(codigo == envioEmail.getCodigo()) {
             mv = new ModelAndView("pages/senhaAtualizar");
             mv.addObject("usuario", usuario);
+            tentativas = 0;
         }else{
-            mv = new ModelAndView("pages/senhaAtualizar");
+            mv = new ModelAndView("pages/senhaRecuperar");
             System.out.println("Código inválido");
+            tentativas ++;
+            System.out.println("Número de tentativas: " + tentativas);
+            if(tentativas == 3){
+                System.out.println("Muitas tentativas erradas, te enviei um novo código para seu email");
+            }
         }
 
         return mv;
