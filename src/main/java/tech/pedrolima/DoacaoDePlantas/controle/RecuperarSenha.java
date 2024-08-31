@@ -1,10 +1,12 @@
 package tech.pedrolima.DoacaoDePlantas.controle;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.repositorios.CadastroRepositorio;
 import tech.pedrolima.DoacaoDePlantas.utils.EnvioEmail;
@@ -43,13 +45,14 @@ public class RecuperarSenha {
     }
 
     @GetMapping("/recuperarSenha/informarEmail/atualizarSenha")
-    public ModelAndView informarCodigo(@RequestParam("code") int codigo, Cadastro usuario){
+    public ModelAndView informarCodigo(@RequestParam("code") int codigo, Cadastro usuario, RedirectAttributes redirectAttributes, HttpSession session){
 
         ModelAndView mv;
 
         System.out.println(codigo);
 
         if(codigo == envioEmail.getCodigo()) {
+            session.setAttribute("codigoValido", true);
             mv = new ModelAndView("pages/senhaAtualizar");
             mv.addObject("usuario", usuario);
             tentativas = 0;
@@ -59,7 +62,9 @@ public class RecuperarSenha {
             tentativas ++;
             System.out.println("Número de tentativas: " + tentativas);
             if(tentativas == 3){
-                System.out.println("Muitas tentativas erradas, te enviei um novo código para seu email");
+                redirectAttributes.addFlashAttribute("alertMessage", "Muitas tentativas erradas. Por favor, verifique o email e tente novamente!");
+                tentativas = 0;
+                return new ModelAndView("redirect:/recuperarSenha");
             }
         }
 

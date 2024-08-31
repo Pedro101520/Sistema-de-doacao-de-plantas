@@ -19,6 +19,12 @@
     </div>
     <button type="submit">Enviar Código de Recuperação</button>
   </form>
+  <script th:inline="javascript">
+    var alertMessage = /*[[${alertMessage}]]*/ '';
+    if(alertMessage){
+        alert(alertMessage);
+    }
+  </script>
 </div>
 </body>
 </html>
