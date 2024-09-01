@@ -12,15 +12,15 @@
 <div class="BottomrightBackground"></div>
 <div class="login-container">
     <h2>Crie uma nova senha</h2>
-    <form action="redirect:/inicio" method="POST">
+    <form action="/atualizarSenha" method="POST">
         <div class="input-group">
-            <label for="username">Senha</label>
-            <input type="password" id="username" name="username" required>
+            <label for="passwordRecover">Senha</label>
+            <input type="password" id="passwordRecover" name="passwordRecover" required>
         </div>
-        <div class="input-group">
-            <label for="username">Digite novamente</label>
-            <input type="password" id="username" name="username" required>
-        </div>
+<!--        <div class="input-group">-->
+<!--            <label for="passwordRecoverCheck">Digite novamente</label>-->
+<!--            <input type="password" id="passwordRecoverCheck" name="passwordRecoverCheck" required>-->
+<!--        </div>-->
         <button type="submit">Confirmar</button>
     </form>
 </div>

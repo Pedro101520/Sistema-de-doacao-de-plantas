@@ -13,5 +13,8 @@ public interface CadastroRepositorio extends JpaRepository<Cadastro, Long> {
     @Query(value = "SELECT email FROM usuario WHERE email = :email", nativeQuery = true)
     String QueryEmail(@Param("email") String email);
 
+    @Query(value = "SELECT id FROM usuario WHERE email = :email", nativeQuery = true)
+    String QueryEmailRecover(@Param("email") String email);
+
     public Cadastro findByEmail(String email);
 }
