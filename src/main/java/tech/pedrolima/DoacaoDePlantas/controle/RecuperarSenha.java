@@ -82,7 +82,7 @@ public class RecuperarSenha {
         return mv;
     }
 
-    @PostMapping("/atualizarSenha")
+    @PostMapping("/atualizarSenhaa")
     public ModelAndView atualizarSenha(@RequestParam("passwordRecover") String novaSenha, HttpSession session, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView();
 

@@ -27,6 +27,7 @@ public class SecurityConfig {
                         .requestMatchers("/recuperarSenha").permitAll()
                         .requestMatchers("/recuperarSenha/informarEmail").permitAll()
                         .requestMatchers("/recuperarSenha/informarEmail/atualizarSenha").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/atualizarSenha").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
