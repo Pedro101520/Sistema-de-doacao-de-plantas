@@ -89,6 +89,28 @@ body .full-width {
     flex: 1 1 100%;
 }
 
+.button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: darkgreen;
+}
+
+.button:active {
+    background-color: darkslategrey;
+}
+
 /* Menu */
 .menu {
     position: fixed;
@@ -278,18 +300,26 @@ img {
 
 
 .plant-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     text-align: center;
+    padding: 1rem;
+    border: 1px solid var(--light-gray-color);
+    border-radius: 8px;
+    background-color: var(--white-color);
+    width: 100%;
 }
 
 .plant-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin-bottom: 1rem;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
 }
 
-.plant-card h2 {
-    font-size: 1.8rem;
+.plant-card h2,
+.plant-card p {
     margin: 0.5rem 0;
     color: var(--primary-color);
 }

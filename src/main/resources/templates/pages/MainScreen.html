@@ -45,6 +45,9 @@
                 <img th:src="@{/listagemDePlantas/plantasDisponiveis/{imagem}(imagem=${planta.caminhoImg})}" alt="Imagem da planta">
                 <h2 th:text="${planta.nome}"></h2>
                 <p th:text="${planta.descricao}"></p>
+                <div class="button-container">
+                    <a href="/" class="button">Adotar Planta</a>
+                </div>
             </div>
         </td>
     </tr>
@@ -57,6 +60,8 @@
     </tr>
     </tbody>
 </table>
+
+<script src="../js/effectButton.js"></script>
 </body>
 
 </html>
