@@ -12,8 +12,8 @@
 <div class="BottomrightBackground"></div>
 <div class="login-container">
     <h2>Crie uma nova senha</h2>
-    <form action="/atualizarSenhaa" method="POST">
-<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+    <form action="/alterarSenha" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="input-group">
             <label for="passwordRecover">Senha</label>
             <input type="password" id="passwordRecover" name="passwordRecover" required>

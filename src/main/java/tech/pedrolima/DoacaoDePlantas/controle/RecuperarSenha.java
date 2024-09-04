@@ -2,12 +2,10 @@ package tech.pedrolima.DoacaoDePlantas.controle;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +14,6 @@ import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.repositorios.CadastroRepositorio;
 import tech.pedrolima.DoacaoDePlantas.utils.EnvioEmail;
 
-import java.util.Optional;
 
 @Controller
 public class RecuperarSenha {
@@ -82,13 +79,14 @@ public class RecuperarSenha {
         return mv;
     }
 
-    @PostMapping("/atualizarSenhaa")
+    @PostMapping("/alterarSenha")
     public ModelAndView atualizarSenha(@RequestParam("passwordRecover") String novaSenha, HttpSession session, RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView();
 
+
         Cadastro cadastro = cadastroRepositorio.findByEmail(emailRecover);
         if (cadastro != null) {
-//            cadastro.setSenha(passwordEncoder().encode(novaSenha));
+            cadastro.setSenha(passwordEncoder().encode(novaSenha));
             cadastroRepositorio.save(cadastro);
             mv.setViewName("redirect:/inicio");
         } else {
@@ -102,8 +100,7 @@ public class RecuperarSenha {
         return mv;
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    public  PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
 }
