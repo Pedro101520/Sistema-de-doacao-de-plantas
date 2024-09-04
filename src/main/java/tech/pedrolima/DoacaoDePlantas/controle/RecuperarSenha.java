@@ -33,7 +33,7 @@ public class RecuperarSenha {
         return mv;
     }
 
-    @GetMapping("/recuperarSenha/informarEmail")
+    @PostMapping("/recuperarSenha/informarEmail")
     //Aqui pega o valor do campo "username" no formulário HTML e o passa para essa variavel
     public ModelAndView confirmar(@RequestParam("username") String email, Cadastro usuario) {
         ModelAndView mv;
@@ -50,7 +50,7 @@ public class RecuperarSenha {
         return mv;
     }
 
-    @GetMapping("/recuperarSenha/informarEmail/atualizarSenha")
+    @PostMapping("/recuperarSenha/informarEmail/atualizarSenha")
     public ModelAndView informarCodigo(@RequestParam("code") int codigo, Cadastro usuario, RedirectAttributes redirectAttributes, HttpSession session) {
 
         ModelAndView mv;
@@ -61,8 +61,6 @@ public class RecuperarSenha {
             session.setAttribute("codigoValido", true);
             mv = new ModelAndView("pages/senhaAtualizar");
             mv.addObject("usuario", usuario);
-//            String idEmail = cadastroRepositorio.QueryEmailRecover(emailRecover);
-//            System.out.println(idEmail);
             tentativas = 0;
         } else {
             mv = new ModelAndView("pages/senhaRecuperar");
