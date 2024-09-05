@@ -46,7 +46,7 @@
                 <h2 th:text="${planta.nome}"></h2>
                 <p th:text="${planta.descricao}"></p>
                 <div class="button-container">
-                    <a href="/" class="button">Adotar Planta</a>
+                    <a th:href="@{/listagemDePlantas/informacoes/{id}(id=${planta.id})}" class="button">Adotar Planta</a>
                 </div>
             </div>
         </td>

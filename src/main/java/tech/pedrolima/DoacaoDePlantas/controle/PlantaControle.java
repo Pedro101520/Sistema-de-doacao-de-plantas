@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 @Controller
 public class PlantaControle {
@@ -86,5 +87,13 @@ public class PlantaControle {
             return Files.readAllBytes(imagemArquivo.toPath());
         }
         return null;
+    }
+
+    @GetMapping("/listagemDePlantas/informacoes/{id}")
+    public ModelAndView exibirDetalhesPlanta(@PathVariable("id") Long id) {
+        ModelAndView mv = new ModelAndView("home");
+        Optional<Planta> infoPlanta = plantaRepositorio.findById(id);
+        mv.addObject("infoPlanta", infoPlanta);
+        return mv;
     }
 }
