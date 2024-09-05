@@ -91,7 +91,7 @@ public class PlantaControle {
 
     @GetMapping("/listagemDePlantas/informacoes/{id}")
     public ModelAndView exibirDetalhesPlanta(@PathVariable("id") Long id) {
-        ModelAndView mv = new ModelAndView("home");
+        ModelAndView mv = new ModelAndView("pages/adotarPlanta");
         Optional<Planta> infoPlanta = plantaRepositorio.findById(id);
         mv.addObject("infoPlanta", infoPlanta);
         return mv;

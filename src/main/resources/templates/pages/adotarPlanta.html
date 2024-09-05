@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Cadastro</title>
+    <link rel="stylesheet" href="../../css/cadastro.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<div class="TopleftBackground"></div>
+<div class="BottomrightBackground"></div>
+<div class="cadastro-container">
+    <h2>Adotar Planta</h2>
+
+    <td>
+        <div class="plant-card">
+            <img th:src="@{'/listagemDePlantas/plantasDisponiveis/' + ${infoPlanta.caminhoImg}}" alt="Imagem da planta">
+        </div>
+    </td>
+
+</div>
+</body>
+</html>
