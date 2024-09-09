@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import tech.pedrolima.DoacaoDePlantas.System.CadastroService;
+import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.modelos.Planta;
 import tech.pedrolima.DoacaoDePlantas.repositorios.PlantaRepositorio;
 
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class PlantaControle {
 
     private static String caminhoImagens = "/home/pedro/Documentos/ImagensPlanta/";
+    private String imagemPorId;
 
     @Autowired
     private PlantaRepositorio plantaRepositorio;
@@ -89,11 +91,35 @@ public class PlantaControle {
         return null;
     }
 
+    @GetMapping("/listagemDePlantas/informacoesPlanta")
+    @ResponseBody
+    public byte[] retornarImagemPorID() throws Exception{
+        String teste = getImagemPorId();
+        File imagemArquivo = new File(caminhoImagens + getImagemPorId());
+        if(getImagemPorId() != null || getImagemPorId().trim().length() > 0){
+            return Files.readAllBytes(imagemArquivo.toPath());
+        }
+        return null;
+    }
+
     @GetMapping("/listagemDePlantas/informacoes/{id}")
     public ModelAndView exibirDetalhesPlanta(@PathVariable("id") Long id) {
+        Optional<Planta> plantaOptional = plantaRepositorio.findById(id);
+        Planta planta = plantaOptional.get();
+        String imagem = planta.getCaminhoImg();
+        setImagemPorId(imagem);
+
         ModelAndView mv = new ModelAndView("pages/adotarPlanta");
         Optional<Planta> infoPlanta = plantaRepositorio.findById(id);
         mv.addObject("infoPlanta", infoPlanta);
         return mv;
+    }
+
+    public String getImagemPorId() {
+        return imagemPorId;
+    }
+
+    public void setImagemPorId(String imagemPorId) {
+        this.imagemPorId = imagemPorId;
     }
 }
