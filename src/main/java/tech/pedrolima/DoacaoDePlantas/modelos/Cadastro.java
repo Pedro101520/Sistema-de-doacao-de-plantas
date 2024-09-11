@@ -1,10 +1,12 @@
 package tech.pedrolima.DoacaoDePlantas.modelos;
 
 import jakarta.persistence.*;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Entity
+@Component
 @Table(name = "usuario")
 public class Cadastro implements Serializable {
 
@@ -23,6 +25,7 @@ public class Cadastro implements Serializable {
     private String numero;
     private String cidade;
     private String estado;
+    private Boolean contato;
 
     public Long getId() {
         return id;

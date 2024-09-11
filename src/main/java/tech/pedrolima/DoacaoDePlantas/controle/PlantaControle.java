@@ -31,6 +31,9 @@ public class PlantaControle {
     @Autowired
     private CadastroService cadastroService;
 
+    @Autowired
+    private Cadastro cadastro;
+
     @GetMapping("/cadastroPlanta")
     public ModelAndView cadastrar(Planta planta) {
         ModelAndView mv = new ModelAndView("pages/MainScreen");
@@ -57,6 +60,16 @@ public class PlantaControle {
             return cadastrar(planta);
         }
 
+        //Parte responsavel por relacionar as tabelas usuario e planta
+        Long userId = cadastroService.getIdByEmail();
+        Optional<Cadastro> cadastroOptional = cadastroService.findById(userId);
+
+        if (!cadastroOptional.isPresent()) {
+            return new ModelAndView("errorPage");
+        }
+        Cadastro cadastro = cadastroOptional.get();
+        planta.setCadastro(cadastro);
+
         plantaRepositorio.saveAndFlush(planta);
 
         try {
@@ -69,15 +82,14 @@ public class PlantaControle {
                 byte[] bytes = arquivo.getBytes();
                 Files.write(caminho, bytes);
 
+                // Defina o caminho da imagem na planta e salve novamente
                 planta.setCaminhoImg(nomeModificado);
+                plantaRepositorio.saveAndFlush(planta);
             }
-
-            //Aqui salva o nome do arquivo no banco de dados
-            plantaRepositorio.saveAndFlush(planta);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return new ModelAndView("redirect:/listagemDePlantas");
     }
 

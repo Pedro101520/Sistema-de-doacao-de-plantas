@@ -15,6 +15,9 @@ public class Planta implements Serializable {
     private String nome;
     private String caminhoImg;
     private String descricao;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Cadastro cadastro;
 
     public Long getId() {
         return id;
@@ -46,5 +49,13 @@ public class Planta implements Serializable {
 
     public void setCaminhoImg(String caminhoImg) {
         this.caminhoImg = caminhoImg;
+    }
+
+    public Cadastro getCadastro() {
+        return cadastro;
+    }
+
+    public void setCadastro(Cadastro cadastro) {
+        this.cadastro = cadastro;
     }
 }

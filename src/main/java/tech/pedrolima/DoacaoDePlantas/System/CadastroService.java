@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.repositorios.CadastroRepositorio;
 
+import java.util.Optional;
+
 @Service
 public class CadastroService implements UserDetailsService {
 
@@ -43,5 +45,9 @@ public class CadastroService implements UserDetailsService {
 
     public Long getIdByEmail(){
         return idByEmail;
+    }
+
+    public Optional<Cadastro> findById(Long id) {
+        return cadastroRepositorio.findById(id);
     }
 }
