@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Cadastro</title>
+  <link rel="stylesheet" href="../../css/cadastro.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+<div class="TopleftBackground"></div>
+<div class="BottomrightBackground"></div>
+<div class="cadastro-container">
+  <h1>Doar Planta</h1>
+  <br>
+  <h3><span th:text="${dadosUser.nome}"></span> Demonstrou interesse por sua planta</h3>
+  <br>
+  <h4>Deseja doar?</h4>
+  <br>
+  <br>
+  <td>
+    <div class="button-container">
+      <a href="/inicio" class="button">Sim</a>
+      <a href="/inicio" class="button">Não</a>
+    </div>
+  </td>
+
+</div>
+</body>
+</html>

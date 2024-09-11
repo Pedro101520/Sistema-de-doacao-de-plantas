@@ -3,6 +3,7 @@ package tech.pedrolima.DoacaoDePlantas.controle;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import tech.pedrolima.DoacaoDePlantas.System.CadastroService;
 import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.modelos.Planta;
+import tech.pedrolima.DoacaoDePlantas.repositorios.CadastroRepositorio;
 import tech.pedrolima.DoacaoDePlantas.repositorios.PlantaRepositorio;
 import tech.pedrolima.DoacaoDePlantas.utils.EnvioEmail;
 
@@ -29,6 +31,9 @@ public class PlantaControle {
 
     @Autowired
     private PlantaRepositorio plantaRepositorio;
+
+    @Autowired
+    private CadastroRepositorio cadastroRepositorio;
 
     @Autowired
     private CadastroService cadastroService;
@@ -144,6 +149,27 @@ public class PlantaControle {
         ModelAndView mv = new ModelAndView("pages/MainScreen");
         return mv;
     }
+
+    @GetMapping("/doar/{idPlanta}/{idUsuario}")
+    public ModelAndView doar(Model model, @PathVariable("idPlanta") Long idPlanta, @PathVariable("idUsuario") Long idUsuario) {
+        Optional<Planta> plantaOptional = plantaRepositorio.findById(idPlanta);
+        Optional<Cadastro> cadastroOptional = cadastroRepositorio.findById(idUsuario);
+
+        ModelAndView mv = new ModelAndView("pages/escolhaDoar");
+
+        //Abaixo é a forma de como adicionar infromações do banco de dados no HTML
+        //Usando Thymeleaf
+        //Além disso tem que colocar o Model model como parametro no metodo, para que funcione
+        if(plantaOptional.isPresent()){
+            model.addAttribute("dadosPlanta", plantaOptional.get());
+        }
+        if(cadastroOptional.isPresent()){
+            model.addAttribute("dadosUser", cadastroOptional.get());
+        }
+
+        return mv;
+    }
+
 
     public String getImagemPorId() {
         return imagemPorId;
