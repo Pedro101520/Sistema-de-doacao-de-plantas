@@ -11,6 +11,7 @@ import tech.pedrolima.DoacaoDePlantas.System.CadastroService;
 import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.modelos.Planta;
 import tech.pedrolima.DoacaoDePlantas.repositorios.PlantaRepositorio;
+import tech.pedrolima.DoacaoDePlantas.utils.EnvioEmail;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class PlantaControle {
 
     private static String caminhoImagens = "/home/pedro/Documentos/ImagensPlanta/";
     private String imagemPorId;
+    private Long idPlanta;
 
     @Autowired
     private PlantaRepositorio plantaRepositorio;
@@ -33,6 +35,9 @@ public class PlantaControle {
 
     @Autowired
     private Cadastro cadastro;
+
+    @Autowired
+    private EnvioEmail envioEmail;
 
     @GetMapping("/cadastroPlanta")
     public ModelAndView cadastrar(Planta planta) {
@@ -116,6 +121,7 @@ public class PlantaControle {
 
     @GetMapping("/listagemDePlantas/informacoes/{id}")
     public ModelAndView exibirDetalhesPlanta(@PathVariable("id") Long id) {
+        setIdPlanta(id);
         Optional<Planta> plantaOptional = plantaRepositorio.findById(id);
         Planta planta = plantaOptional.get();
         String imagem = planta.getCaminhoImg();
@@ -127,11 +133,31 @@ public class PlantaControle {
         return mv;
     }
 
+    @GetMapping("/listagemDePlantas/informacoes/adotarPlanta")
+    public ModelAndView adotar() {
+        Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
+        Planta planta = plantaOptional.get();
+        String email = planta.getCadastro().getEmail();
+
+        envioEmail.emailDoacao(email);
+
+        ModelAndView mv = new ModelAndView("pages/MainScreen");
+        return mv;
+    }
+
     public String getImagemPorId() {
         return imagemPorId;
     }
 
     public void setImagemPorId(String imagemPorId) {
         this.imagemPorId = imagemPorId;
+    }
+
+    public Long getIdPlanta() {
+        return idPlanta;
+    }
+
+    public void setIdPlanta(Long idPlanta) {
+        this.idPlanta = idPlanta;
     }
 }

@@ -45,6 +45,30 @@ public class EnvioEmail {
         }
     }
 
+    public void emailDoacao(String email){
+        String assunto = "Doar Planta";
+
+        String mensagem = "Olá tudo bem?\n\n" +
+                "Estou entrando em contato, pois apareceu um interessado em adotar a planta\n" +
+                "que você cadastrou no site doaplanta.com\n" +
+                "Acesse o link e veja mais informações";
+
+        //Código de envio de emails, com Spring boot
+        try{
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            simpleMailMessage.setFrom(remetente);
+            simpleMailMessage.setTo(email);
+            simpleMailMessage.setSubject(assunto);
+            simpleMailMessage.setText(mensagem);
+            javaMailSender.send(simpleMailMessage);
+            setCodigo(randomNumber);
+            System.out.println("Email enviado");
+        }catch (Exception e){
+            System.out.println("Erro ao enviar");
+        }
+    }
+
+
     public int getCodigo(){
         return randomNumber;
     }
