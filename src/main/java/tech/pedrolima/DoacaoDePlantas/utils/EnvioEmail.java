@@ -45,13 +45,14 @@ public class EnvioEmail {
         }
     }
 
-    public void emailDoacao(String email){
+    public void emailDoacao(String email, Long idPlanta, Long idUser){
         String assunto = "Doar Planta";
 
         String mensagem = "Olá tudo bem?\n\n" +
                 "Estou entrando em contato, pois apareceu um interessado em adotar a planta\n" +
                 "que você cadastrou no site doaplanta.com\n" +
-                "Acesse o link e veja mais informações";
+                "Acesse o link e veja mais informações\n\n" +
+                "localhost:8080/doar/" + idPlanta + "/" + idUser;
 
         //Código de envio de emails, com Spring boot
         try{
@@ -61,7 +62,28 @@ public class EnvioEmail {
             simpleMailMessage.setSubject(assunto);
             simpleMailMessage.setText(mensagem);
             javaMailSender.send(simpleMailMessage);
-            setCodigo(randomNumber);
+            System.out.println("Email enviado");
+        }catch (Exception e){
+            System.out.println("Erro ao enviar");
+        }
+    }
+
+    public void emailDoacaoNegada(String email){
+        String assunto = "Status sobre o seu pedido de adoção de planta";
+
+        String mensagem = "Olá tudo bem?\n\n" +
+                "Estou entrando em contato, pois o resposnsável pela planta que você se\n " +
+                "interessou, infelizmente negou o seu pedido de adoção\n" +
+                "Mas não fique triste, você poderá continuar navegando pelo site e encontrar a sua próxima planta";
+
+        //Código de envio de emails, com Spring boot
+        try{
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            simpleMailMessage.setFrom(remetente);
+            simpleMailMessage.setTo(email);
+            simpleMailMessage.setSubject(assunto);
+            simpleMailMessage.setText(mensagem);
+            javaMailSender.send(simpleMailMessage);
             System.out.println("Email enviado");
         }catch (Exception e){
             System.out.println("Erro ao enviar");

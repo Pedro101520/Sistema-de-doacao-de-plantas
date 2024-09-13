@@ -28,6 +28,7 @@ public class PlantaControle {
     private static String caminhoImagens = "/home/pedro/Documentos/ImagensPlanta/";
     private String imagemPorId;
     private Long idPlanta;
+    private String email;
 
     @Autowired
     private PlantaRepositorio plantaRepositorio;
@@ -142,12 +143,12 @@ public class PlantaControle {
     public ModelAndView adotar() {
         Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
         Planta planta = plantaOptional.get();
-        String email = planta.getCadastro().getEmail();
+//        String email = planta.getCadastro().getEmail();
+        setEmail(planta.getCadastro().getEmail());
 
-        envioEmail.emailDoacao(email);
+        envioEmail.emailDoacao(getEmail(), planta.getId(), cadastroService.getIdByEmail());
 
-        ModelAndView mv = new ModelAndView("pages/MainScreen");
-        return mv;
+        return new ModelAndView("redirect:/listagemDePlantas");
     }
 
     @GetMapping("/doar/{idPlanta}/{idUsuario}")
@@ -170,6 +171,12 @@ public class PlantaControle {
         return mv;
     }
 
+    @GetMapping("/doacaoNegada")
+    public ModelAndView doacaoNegada() {
+        envioEmail.emailDoacaoNegada(getEmail());
+        return new ModelAndView("redirect:/listagemDePlantas");
+    }
+
 
     public String getImagemPorId() {
         return imagemPorId;
@@ -185,5 +192,13 @@ public class PlantaControle {
 
     public void setIdPlanta(Long idPlanta) {
         this.idPlanta = idPlanta;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

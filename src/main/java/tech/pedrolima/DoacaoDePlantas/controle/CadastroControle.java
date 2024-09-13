@@ -28,7 +28,7 @@ public class CadastroControle {
 
     @GetMapping("/cadastroUsuario")
     public ModelAndView cadastrar(Cadastro usuario){
-        ModelAndView mv = new ModelAndView("logins/login");
+        ModelAndView mv = new ModelAndView("cadastros/cadastro");
         mv.addObject("usuario", usuario);
         mv.addObject("listaNomes", cadastroRepositorio.findAll());
         return mv;
