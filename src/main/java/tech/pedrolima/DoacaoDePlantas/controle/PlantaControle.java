@@ -152,15 +152,17 @@ public class PlantaControle {
 
     @GetMapping("/doar/{idPlanta}/{idUsuario}")
     public ModelAndView doar(Model model, @PathVariable("idPlanta") Long idPlanta, @PathVariable("idUsuario") Long idUsuario) {
+        ModelAndView mv;
+
         Optional<Planta> plantaOptional = plantaRepositorio.findById(idPlanta);
         Optional<Cadastro> cadastroOptional = cadastroRepositorio.findById(idUsuario);
 
         Planta planta = plantaOptional.get();
         if(!planta.getCadastro().getId().equals(cadastroService.getIdByEmail())){
             return new ModelAndView("redirect:/aviso");
+        }else{
+            mv = new ModelAndView("pages/escolhaDoar");
         }
-
-        ModelAndView mv = new ModelAndView("pages/escolhaDoar");
 
         //Abaixo é a forma de como adicionar infromações do banco de dados no HTML
         //Usando Thymeleaf
@@ -181,6 +183,13 @@ public class PlantaControle {
     public ModelAndView doacaoNegada() {
         envioEmail.emailDoacaoNegada(getEmailAdotante());
         return new ModelAndView("redirect:/listagemDePlantas");
+    }
+
+    @GetMapping("/confirmarDados")
+    public ModelAndView confirmarDados() {
+//        envioEmail.emailDoacaoNegada(getEmailAdotante());
+        ModelAndView mv = new ModelAndView("pages/confirmarDados");
+        return mv;
     }
 
 
