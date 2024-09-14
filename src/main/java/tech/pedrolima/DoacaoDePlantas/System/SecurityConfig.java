@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .failureUrl("/login?error=true")  // Redireciona para /login com parâmetro de erro em caso de falha
-                        .defaultSuccessUrl("/listagemDePlantas", true)
+                        .defaultSuccessUrl("/listagemDePlantas", false)
                         .permitAll()
                 )
                 .logout(config -> config

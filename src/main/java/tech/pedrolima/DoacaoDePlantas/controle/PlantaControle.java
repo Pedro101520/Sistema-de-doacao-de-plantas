@@ -28,7 +28,7 @@ public class PlantaControle {
     private static String caminhoImagens = "/home/pedro/Documentos/ImagensPlanta/";
     private String imagemPorId;
     private Long idPlanta;
-    private String email;
+    private String emailAdotante;
 
     @Autowired
     private PlantaRepositorio plantaRepositorio;
@@ -143,10 +143,9 @@ public class PlantaControle {
     public ModelAndView adotar() {
         Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
         Planta planta = plantaOptional.get();
-//        String email = planta.getCadastro().getEmail();
-        setEmail(planta.getCadastro().getEmail());
+        String email = planta.getCadastro().getEmail();
 
-        envioEmail.emailDoacao(getEmail(), planta.getId(), cadastroService.getIdByEmail());
+        envioEmail.emailDoacao(email, planta.getId(), cadastroService.getIdByEmail());
 
         return new ModelAndView("redirect:/listagemDePlantas");
     }
@@ -155,6 +154,11 @@ public class PlantaControle {
     public ModelAndView doar(Model model, @PathVariable("idPlanta") Long idPlanta, @PathVariable("idUsuario") Long idUsuario) {
         Optional<Planta> plantaOptional = plantaRepositorio.findById(idPlanta);
         Optional<Cadastro> cadastroOptional = cadastroRepositorio.findById(idUsuario);
+
+        Planta planta = plantaOptional.get();
+        if(!planta.getCadastro().getId().equals(cadastroService.getIdByEmail())){
+            return new ModelAndView("redirect:/aviso");
+        }
 
         ModelAndView mv = new ModelAndView("pages/escolhaDoar");
 
@@ -166,6 +170,8 @@ public class PlantaControle {
         }
         if(cadastroOptional.isPresent()){
             model.addAttribute("dadosUser", cadastroOptional.get());
+            Cadastro cadastro = cadastroOptional.get();
+            setEmailAdotante(cadastro.getEmail());
         }
 
         return mv;
@@ -173,7 +179,7 @@ public class PlantaControle {
 
     @GetMapping("/doacaoNegada")
     public ModelAndView doacaoNegada() {
-        envioEmail.emailDoacaoNegada(getEmail());
+        envioEmail.emailDoacaoNegada(getEmailAdotante());
         return new ModelAndView("redirect:/listagemDePlantas");
     }
 
@@ -194,11 +200,11 @@ public class PlantaControle {
         this.idPlanta = idPlanta;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailAdotante() {
+        return emailAdotante;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailAdotante(String emailAdotante) {
+        this.emailAdotante = emailAdotante;
     }
 }
