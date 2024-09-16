@@ -79,4 +79,35 @@ public class CadastroControle {
         Optional<Cadastro> cadastro = cadastroRepositorio.findById(id);
         return atualizar(cadastro.get());
     }
+
+    @PostMapping("/atualizarUsuario")
+    public ModelAndView atualizarUsuario(Cadastro cadastro, BindingResult result) {
+        if (result.hasErrors()) {
+            return atualizar(cadastro);
+        }
+
+        Long userId = cadastroService.getIdByEmail();
+        if (userId != null) {
+            Optional<Cadastro> cadastroExistente = cadastroRepositorio.findById(userId);
+            if (cadastroExistente.isPresent()) {
+                Cadastro cadastroAtualizado = cadastroExistente.get();
+                cadastroAtualizado.setNome(cadastro.getNome());
+                cadastroAtualizado.setSobrenome(cadastro.getSobrenome());
+                cadastroAtualizado.setEmail(cadastro.getEmail());
+                cadastroAtualizado.setTelefone(cadastro.getTelefone());
+                cadastroAtualizado.setCEP(cadastro.getCEP());
+                cadastroAtualizado.setRua(cadastro.getRua());
+                cadastroAtualizado.setBairro(cadastro.getBairro());
+                cadastroAtualizado.setNumero(cadastro.getNumero());
+                cadastroAtualizado.setCidade(cadastro.getCidade());
+                cadastroAtualizado.setEstado(cadastro.getEstado());
+                cadastroAtualizado.setSenha(passwordEncoder.encode(cadastro.getSenha()));
+                cadastroRepositorio.saveAndFlush(cadastroAtualizado);
+            } else {
+                return new ModelAndView("erro", "mensagem", "Cadastro não encontrado.");
+            }
+        }
+
+        return new ModelAndView("redirect:/atualizacaoDados");
+    }
 }

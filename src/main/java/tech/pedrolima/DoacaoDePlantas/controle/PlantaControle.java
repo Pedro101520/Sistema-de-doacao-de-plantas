@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import tech.pedrolima.DoacaoDePlantas.Dto.ConfirmarDadosDTO;
 import tech.pedrolima.DoacaoDePlantas.System.CadastroService;
 import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.modelos.Planta;
@@ -44,6 +45,9 @@ public class PlantaControle {
 
     @Autowired
     private EnvioEmail envioEmail;
+
+//    @Autowired
+//    private ConfirmarDadosDTO confirmarDadosDTO;
 
     @GetMapping("/cadastroPlanta")
     public ModelAndView cadastrar(Planta planta) {
@@ -187,10 +191,43 @@ public class PlantaControle {
 
     @GetMapping("/confirmarDados")
     public ModelAndView confirmarDados() {
-//        envioEmail.emailDoacaoNegada(getEmailAdotante());
         ModelAndView mv = new ModelAndView("pages/confirmarDados");
         return mv;
     }
+
+//    @PostMapping("/confirmarDadosDoador")
+//    public ModelAndView confirmar(){
+//        ModelAndView mv = new ModelAndView("pages/confirmarDados");
+//        return mv;
+//    }
+
+//    @GetMapping("/confirmarDados")
+//    public ModelAndView atualizar(Cadastro usuario){
+//        ModelAndView mv = new ModelAndView("pages/confirmarDados");
+//
+//        System.out.println("==============" + "Pedro" + "=================");
+//        ConfirmarDadosDTO confirmarDadosDTO = new ConfirmarDadosDTO();
+//
+//        confirmarDadosDTO.setEmail(planta.getCadastro().getEmail());
+//        confirmarDadosDTO.setNomePlanta(planta.getNome());
+//        confirmarDadosDTO.setNumWhatsApp(planta.getCadastro().getTelefone());
+//
+//        model.addAttribute("dadosDoador", confirmarDadosDTO);
+//
+//        mv.addObject("usuario", usuario);
+//        mv.addObject("listaNomes", cadastroRepositorio.findAll());
+//        return mv;
+//    }
+//
+//    @GetMapping("/editarUsuario/{id}")
+//    public ModelAndView editar(@PathVariable("id") Long id){
+//        Long userId = cadastroService.getIdByEmail();
+//        if (!id.equals(userId)) {
+//            return new ModelAndView("redirect:/aviso");
+//        }
+//        Optional<Cadastro> cadastro = cadastroRepositorio.findById(id);
+//        return atualizar(cadastro.get());
+//    }
 
 
     public String getImagemPorId() {
