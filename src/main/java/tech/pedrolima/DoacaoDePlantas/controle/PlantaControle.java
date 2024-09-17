@@ -190,44 +190,34 @@ public class PlantaControle {
     }
 
     @GetMapping("/confirmarDados")
-    public ModelAndView confirmarDados() {
+    public ModelAndView atualizar(ConfirmarDadosDTO dados){
         ModelAndView mv = new ModelAndView("pages/confirmarDados");
+
+        mv.addObject("dadosDoador", dados);
         return mv;
     }
 
-//    @PostMapping("/confirmarDadosDoador")
-//    public ModelAndView confirmar(){
-//        ModelAndView mv = new ModelAndView("pages/confirmarDados");
-//        return mv;
-//    }
+    @GetMapping("/conferirInformacao")
+    public ModelAndView conferir(){
+        Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
+        Planta planta = plantaOptional.get();
+        ConfirmarDadosDTO confirmarDadosDTO = new ConfirmarDadosDTO();
 
-//    @GetMapping("/confirmarDados")
-//    public ModelAndView atualizar(Cadastro usuario){
-//        ModelAndView mv = new ModelAndView("pages/confirmarDados");
-//
-//        System.out.println("==============" + "Pedro" + "=================");
-//        ConfirmarDadosDTO confirmarDadosDTO = new ConfirmarDadosDTO();
-//
-//        confirmarDadosDTO.setEmail(planta.getCadastro().getEmail());
-//        confirmarDadosDTO.setNomePlanta(planta.getNome());
-//        confirmarDadosDTO.setNumWhatsApp(planta.getCadastro().getTelefone());
-//
-//        model.addAttribute("dadosDoador", confirmarDadosDTO);
-//
-//        mv.addObject("usuario", usuario);
-//        mv.addObject("listaNomes", cadastroRepositorio.findAll());
-//        return mv;
-//    }
-//
-//    @GetMapping("/editarUsuario/{id}")
-//    public ModelAndView editar(@PathVariable("id") Long id){
-//        Long userId = cadastroService.getIdByEmail();
-//        if (!id.equals(userId)) {
-//            return new ModelAndView("redirect:/aviso");
-//        }
-//        Optional<Cadastro> cadastro = cadastroRepositorio.findById(id);
-//        return atualizar(cadastro.get());
-//    }
+        confirmarDadosDTO.setEmail(planta.getCadastro().getEmail());
+        confirmarDadosDTO.setNomePlanta(planta.getNome());
+        confirmarDadosDTO.setNumWhatsApp(planta.getCadastro().getTelefone());
+
+        return atualizar(confirmarDadosDTO);
+    }
+
+    @PostMapping("/enviarInformacoes")
+    public ModelAndView salvar(ConfirmarDadosDTO dadosDTO) {
+
+        System.out.println(getEmailAdotante());
+        envioEmail.emailInfoDoacao(getEmailAdotante(), dadosDTO.getEndRetirada(), dadosDTO.getObs(), dadosDTO.getEmail(), dadosDTO.getNomePlanta(), dadosDTO.getNumWhatsApp());
+
+        return new ModelAndView("redirect:/listagemDePlantas");
+    }
 
 
     public String getImagemPorId() {

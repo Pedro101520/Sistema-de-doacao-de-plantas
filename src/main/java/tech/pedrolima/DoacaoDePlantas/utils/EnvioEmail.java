@@ -90,6 +90,32 @@ public class EnvioEmail {
         }
     }
 
+    public void emailInfoDoacao(String emailAdotante, String enderecoRetirada, String obs, String emailDoador, String nomePlanta, String numWhatsApp){
+        String assunto = "Status sobre o seu pedido de adoção de planta";
+
+        String mensagem = "Olá tudo bem?\n\n" +
+                "Estou entrando em contato, pois o resposnsável pela planta que você se\n " +
+                "interessou, aceitou o pedido de adoção da sua futura planta. Abaixo vou te fornecer algumas informações de contato:\n\n" +
+                "Nome da planta:" + nomePlanta + "\n" +
+                "Endereço de retirada: " + enderecoRetirada + "\n" +
+                "Observações: " + obs + "\n" +
+                "Número de WhatsApp: " + numWhatsApp + "\n" +
+                "Email do doador: " + emailDoador + "\n";
+
+        //Código de envio de emails, com Spring boot
+        try{
+            SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+            simpleMailMessage.setFrom(remetente);
+            simpleMailMessage.setTo(emailAdotante);
+            simpleMailMessage.setSubject(assunto);
+            simpleMailMessage.setText(mensagem);
+            javaMailSender.send(simpleMailMessage);
+            System.out.println("Email enviado");
+        }catch (Exception e){
+            System.out.println("Erro ao enviar");
+        }
+    }
+
 
     public int getCodigo(){
         return randomNumber;

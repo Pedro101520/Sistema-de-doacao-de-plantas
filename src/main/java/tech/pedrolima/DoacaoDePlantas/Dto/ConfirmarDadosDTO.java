@@ -7,6 +7,8 @@ public class ConfirmarDadosDTO {
     private String nomePlanta;
     private String numWhatsApp;
     private String email;
+    private String endRetirada;
+    private String obs;
 
     public String getNomePlanta() {
         return nomePlanta;
@@ -30,5 +32,21 @@ public class ConfirmarDadosDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEndRetirada() {
+        return endRetirada;
+    }
+
+    public void setEndRetirada(String endRetirada) {
+        this.endRetirada = endRetirada;
+    }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
     }
 }

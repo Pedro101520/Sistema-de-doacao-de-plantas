@@ -16,16 +16,16 @@
     <p>Essas informações, serão enviadas ao adotante. Após confirmar os dados, espere ele entrar em contato com você.</p>
     <br>
     <br>
-    <form action="#" method="POST" th:object="${dadosDoador}">
+    <form action="/enviarInformacoes" method="POST" th:object="${dadosDoador}">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="form-grid-dados">
             <div class="input-group">
                 <label for="nome_planta">Nome da Planta</label>
-                <input type="text" id="nome_planta" name="nome_planta" required th:field="*{nomePlanta}">
+                <input type="text" id="nome_planta" name="nome_planta" required th:field="*{nomePlanta}" readonly>
             </div>
             <div class="input-group">
                 <label for="enderecoRetira">Endereço de retirada</label>
-                <input type="text" id="enderecoRetira" name="enderecoRetira" required>
+                <input type="text" id="enderecoRetira" name="enderecoRetira" th:field="*{endRetirada}" required>
             </div>
             <div class="input-group">
                 <label for="numWhatsApp">Número WhatsApp</label>
@@ -39,7 +39,7 @@
         <br>
         <div class="input-group">
             <label for="descricao">Observação</label>
-            <textarea id="descricao" name="descricao" rows="4" required></textarea>
+            <textarea id="descricao" name="descricao" rows="4" th:field="*{obs}" required></textarea>
         </div>
         <button type="submit">Cadastrar</button>
     </form>
