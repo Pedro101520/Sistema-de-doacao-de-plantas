@@ -210,11 +210,29 @@ public class PlantaControle {
         return atualizar(confirmarDadosDTO);
     }
 
+    @DeleteMapping("/deletarPlanta")
+    public void deletarPlanta(Long id){
+        Optional<Planta> plantaOptional = plantaRepositorio.findById(id);
+        plantaRepositorio.deleteById(id);
+    }
+
     @PostMapping("/enviarInformacoes")
     public ModelAndView salvar(ConfirmarDadosDTO dadosDTO) {
-
-        System.out.println(getEmailAdotante());
         envioEmail.emailInfoDoacao(getEmailAdotante(), dadosDTO.getEndRetirada(), dadosDTO.getObs(), dadosDTO.getEmail(), dadosDTO.getNomePlanta(), dadosDTO.getNumWhatsApp());
+
+        Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
+        Planta planta = plantaOptional.get();
+        String caminhoImagem = caminhoImagens + planta.getCaminhoImg();
+
+        File arquivoImagem = new File(caminhoImagem);
+        if (arquivoImagem.exists()) {
+            if (arquivoImagem.delete()) {
+                System.out.println("Imagem deletada com sucesso: " + caminhoImagem);
+            } else {
+                System.out.println("Falha ao deletar a imagem: " + caminhoImagem);
+            }
+        }
+        deletarPlanta(getIdPlanta());
 
         return new ModelAndView("redirect:/listagemDePlantas");
     }
