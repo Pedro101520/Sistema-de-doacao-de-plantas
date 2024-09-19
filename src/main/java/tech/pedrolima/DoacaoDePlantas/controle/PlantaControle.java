@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tech.pedrolima.DoacaoDePlantas.Dto.ConfirmarDadosDTO;
 import tech.pedrolima.DoacaoDePlantas.System.CadastroService;
 import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
@@ -131,6 +132,7 @@ public class PlantaControle {
 
     @GetMapping("/listagemDePlantas/informacoes/{id}")
     public ModelAndView exibirDetalhesPlanta(@PathVariable("id") Long id) {
+        String mensagemAviso = "Sua solicitação de adoção foi enviada!";
         setIdPlanta(id);
         Optional<Planta> plantaOptional = plantaRepositorio.findById(id);
         Planta planta = plantaOptional.get();
@@ -140,19 +142,26 @@ public class PlantaControle {
         ModelAndView mv = new ModelAndView("pages/adotarPlanta");
         Optional<Planta> infoPlanta = plantaRepositorio.findById(id);
         mv.addObject("infoPlanta", infoPlanta);
+        mv.addObject("mensagem", mensagemAviso);
+
         return mv;
     }
 
     @GetMapping("/listagemDePlantas/informacoes/adotarPlanta")
-    public ModelAndView adotar() {
+    public ModelAndView adotar(RedirectAttributes redirectAttributes) {
         Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
         Planta planta = plantaOptional.get();
         String email = planta.getCadastro().getEmail();
 
         envioEmail.emailDoacao(email, planta.getId(), cadastroService.getIdByEmail());
 
+        // Adiciona a mensagem de sucesso ao RedirectAttributes
+        redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
+
+        // Redireciona de volta para a listagem de plantas
         return new ModelAndView("redirect:/listagemDePlantas");
     }
+
 
     @GetMapping("/doar/{idPlanta}/{idUsuario}")
     public ModelAndView doar(Model model, @PathVariable("idPlanta") Long idPlanta, @PathVariable("idUsuario") Long idUsuario) {
