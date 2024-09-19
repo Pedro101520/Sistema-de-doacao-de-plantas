@@ -156,6 +156,7 @@ public class PlantaControle {
 
         redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
 
+
         redirectAttributes.addFlashAttribute("mensagem", "Sua solicitação de adoção foi enviada!");
         mv.setViewName("redirect:/listagemDePlanta");
 
