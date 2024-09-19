@@ -132,7 +132,6 @@ public class PlantaControle {
 
     @GetMapping("/listagemDePlantas/informacoes/{id}")
     public ModelAndView exibirDetalhesPlanta(@PathVariable("id") Long id) {
-        String mensagemAviso = "Sua solicitação de adoção foi enviada!";
         setIdPlanta(id);
         Optional<Planta> plantaOptional = plantaRepositorio.findById(id);
         Planta planta = plantaOptional.get();
@@ -142,24 +141,25 @@ public class PlantaControle {
         ModelAndView mv = new ModelAndView("pages/adotarPlanta");
         Optional<Planta> infoPlanta = plantaRepositorio.findById(id);
         mv.addObject("infoPlanta", infoPlanta);
-        mv.addObject("mensagem", mensagemAviso);
 
         return mv;
     }
 
     @GetMapping("/listagemDePlantas/informacoes/adotarPlanta")
     public ModelAndView adotar(RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView();
         Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
         Planta planta = plantaOptional.get();
         String email = planta.getCadastro().getEmail();
 
         envioEmail.emailDoacao(email, planta.getId(), cadastroService.getIdByEmail());
 
-        // Adiciona a mensagem de sucesso ao RedirectAttributes
         redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
 
-        // Redireciona de volta para a listagem de plantas
-        return new ModelAndView("redirect:/listagemDePlantas");
+        redirectAttributes.addFlashAttribute("mensagem", "Sua solicitação de adoção foi enviada!");
+        mv.setViewName("redirect:/listagemDePlanta");
+
+        return mv;
     }
 
 
