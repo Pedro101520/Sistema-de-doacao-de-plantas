@@ -86,5 +86,36 @@
         <button type="submit">Cadastrar</button>
     </form>
 </div>
+
+<!--Instalando o JQUERY-->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!--JQUEY Mask-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+<!--Aplicando as mascaras-->
+</body>
+<script>
+    $('#nome, #sobrenome, #rua, #bairro, #cidade, #estado').on('keypress', function (e) {
+    const char = String.fromCharCode(e.which);
+    const regex = /^[A-Za-zÀ-ÖØ-ÿ\s]+$/;
+    if (!regex.test(char)) {
+        e.preventDefault();
+        }
+    });
+    $('#numero').mask('0000');
+    $('#telefone').mask('(00) 0000-0000');
+    $('#cep').mask('00000-000');
+
+    // Verificação de confirmação de senha
+    $('form').on('submit', function (e) {
+        const senha = $('#senha').val();
+        const confirmarSenha = $('#confirmarSenha').val();
+
+        if (senha !== confirmarSenha) {
+            e.preventDefault(); // Impede o envio do formulário
+            $('#confirmarSenha')[0].setCustomValidity("As senhas não conferem");
+        }
+    });
+</script>
+
 </body>
 </html>

@@ -145,7 +145,8 @@ public class PlantaControle {
         return mv;
     }
 
-    @GetMapping("/listagemDePlantas/informacoes/adotarPlanta")
+    // Arrumar o erro do alert
+    @PostMapping("/listagemDePlantas/informacoes/adotarPlanta")
     public ModelAndView adotar(RedirectAttributes redirectAttributes) {
         ModelAndView mv = new ModelAndView();
         Optional<Planta> plantaOptional = plantaRepositorio.findById(getIdPlanta());
@@ -154,11 +155,11 @@ public class PlantaControle {
 
         envioEmail.emailDoacao(email, planta.getId(), cadastroService.getIdByEmail());
 
+//        redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
+
+
         redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
-
-
-        redirectAttributes.addFlashAttribute("mensagem", "Sua solicitação de adoção foi enviada!");
-        mv.setViewName("redirect:/listagemDePlanta");
+        mv.setViewName("redirect:/listagemDePlantas");
 
         return mv;
     }

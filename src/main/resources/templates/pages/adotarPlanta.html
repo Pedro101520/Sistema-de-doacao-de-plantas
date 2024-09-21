@@ -20,11 +20,14 @@
         </div>
         <br>
         <div class="button-container">
-            <form action="/listagemDePlantas/informacoes/adotarPlanta" method="GET">
+            <form action="/listagemDePlantas/informacoes/adotarPlanta" method="POST">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <button type="submit" class="button">Adotar Planta</button>
             </form>
-            <div th:text="${mensagem}"></div>
+<!--            <div th:if="${alertMessage != null}">-->
+<!--                <div class="alert alert-success" th:text="${alertMessage}"></div>-->
+<!--            </div>-->
+
         </div>
     </td>
 </div>

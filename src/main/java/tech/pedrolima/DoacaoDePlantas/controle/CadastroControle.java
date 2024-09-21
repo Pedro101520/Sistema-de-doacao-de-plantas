@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import tech.pedrolima.DoacaoDePlantas.System.CadastroService;
 import tech.pedrolima.DoacaoDePlantas.modelos.Cadastro;
 import tech.pedrolima.DoacaoDePlantas.repositorios.CadastroRepositorio;
@@ -81,7 +82,10 @@ public class CadastroControle {
     }
 
     @PostMapping("/atualizarUsuario")
-    public ModelAndView atualizarUsuario(Cadastro cadastro, BindingResult result) {
+    public ModelAndView atualizarUsuario(Cadastro cadastro, BindingResult result, RedirectAttributes redirectAttributes) {
+        ModelAndView mv = new ModelAndView();
+
+
         if (result.hasErrors()) {
             return atualizar(cadastro);
         }
@@ -104,10 +108,11 @@ public class CadastroControle {
                 cadastroAtualizado.setSenha(passwordEncoder.encode(cadastro.getSenha()));
                 cadastroRepositorio.saveAndFlush(cadastroAtualizado);
             } else {
+//                mv.addObject("erro", "Cadastro não encontrado");
                 return new ModelAndView("erro", "mensagem", "Cadastro não encontrado.");
             }
         }
 
-        return new ModelAndView("redirect:/atualizacaoDados");
+        return mv;
     }
 }
