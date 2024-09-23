@@ -12,18 +12,53 @@
 <div class="BottomrightBackground"></div>
 <div class="login-container">
     <h2>Crie uma nova senha</h2>
-    <form action="/alterarSenha" method="POST">
+    <form id="senhaFormulario" action="/alterarSenha" method="POST">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="input-group">
             <label for="passwordRecover">Senha</label>
             <input type="password" id="passwordRecover" name="passwordRecover" required>
         </div>
-<!--        <div class="input-group">-->
-<!--            <label for="passwordRecoverCheck">Digite novamente</label>-->
-<!--            <input type="password" id="passwordRecoverCheck" name="passwordRecoverCheck" required>-->
-<!--        </div>-->
+        <div class="input-group">
+            <label for="confirmarSenhaAtualizar">Confirmar Senha</label>
+            <input type="password" id="confirmarSenhaAtualizar" name="confirmarSenhaAtualizar" required>
+        </div>
+
         <button type="submit">Confirmar</button>
     </form>
 </div>
+
+<!--Instalando o JQUERY-->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!--JQUEY Mask-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+
+<script>
+    // Verificação no envio do formulário
+    $('#senhaFormulario').on('submit', function (e) {
+        let senhaAtualizar = $('#passwordRecover').val();
+        let confirmarSenhaAtualizar = $('#confirmarSenhaAtualizar').val();
+
+        if (senhaAtualizar !== confirmarSenhaAtualizar) {
+            e.preventDefault(); // Impede o envio do formulário
+            $('#confirmarSenhaAtualizar')[0].setCustomValidity("As senhas não conferem");
+        } else {
+            $('#confirmarSenhaAtualizar')[0].setCustomValidity(""); // Limpa a mensagem de erro
+        }
+    });
+
+
+    $('#passwordRecover, #confirmarSenhaAtualizar').on('input', function () {
+        let senhaAtualizar = $('#passwordRecover').val();
+        let confirmarSenhaAtualizar = $('#confirmarSenhaAtualizar').val();
+
+        if (senhaAtualizar && confirmarSenhaAtualizar && senhaAtualizar !== confirmarSenhaAtualizar) {
+            $('#confirmarSenhaAtualizar')[0].setCustomValidity("As senhas não conferem");
+        } else {
+            $('#confirmarSenhaAtualizar')[0].setCustomValidity("");
+        }
+    });
+</script>
+
+
 </body>
 </html>

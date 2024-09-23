@@ -88,15 +88,27 @@
     $('#telefone').mask('(00) 0000-0000');
     $('#cep').mask('00000-000');
 
-
-    // Verificação de confirmação de senha
-    $('form').on('submit', function (e) {
-        const senha = $('#senha').val();
-        const confirmarSenha = $('#confirmarSenha').val();
+    // Confirmar senha
+    $('#senha').on('submit', function (e) {
+        let senha = $('#senha').val();
+        let confirmarSenha = $('#confirmarSenha').val();
 
         if (senha !== confirmarSenha) {
-            e.preventDefault(); // Impede o envio do formulário
+            e.preventDefault();
             $('#confirmarSenha')[0].setCustomValidity("As senhas não conferem");
+        } else {
+            $('#confirmarSenha')[0].setCustomValidity("");
+        }
+    });
+
+    $('#senha, #confirmarSenha').on('input', function () {
+        let senha= $('#senha').val();
+        let confirmarSenha = $('#confirmarSenha').val();
+
+        if (senha && confirmarSenha && senha !== confirmarSenha) {
+            $('#confirmarSenha')[0].setCustomValidity("As senhas não conferem");
+        } else {
+            $('#confirmarSenha')[0].setCustomValidity("");
         }
     });
 </script>
