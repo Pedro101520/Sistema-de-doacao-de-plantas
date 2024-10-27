@@ -18,6 +18,7 @@ public class Planta implements Serializable {
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Cadastro cadastro;
+    private boolean adocaoSolicitada;
 
     public Long getId() {
         return id;
@@ -57,5 +58,13 @@ public class Planta implements Serializable {
 
     public void setCadastro(Cadastro cadastro) {
         this.cadastro = cadastro;
+    }
+
+    public boolean getAdocaoSolicitada() {
+        return adocaoSolicitada;
+    }
+
+    public void setAdocaoSolicitada(boolean adocaoSolicitada) {
+        this.adocaoSolicitada = adocaoSolicitada;
     }
 }

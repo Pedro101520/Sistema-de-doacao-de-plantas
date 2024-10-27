@@ -179,7 +179,7 @@ public class PlantaControle {
             mv = new ModelAndView("pages/escolhaDoar");
         }
 
-        //Abaixo é a forma de como adicionar infromações do banco de dados no HTML
+        //Abaixo é a forma de como adicionar informações do banco de dados no HTML
         //Usando Thymeleaf
         //Além disso tem que colocar o Model model como parametro no metodo, para que funcione
         if(plantaOptional.isPresent()){
