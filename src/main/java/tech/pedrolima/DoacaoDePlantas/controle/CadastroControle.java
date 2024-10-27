@@ -60,7 +60,8 @@ public class CadastroControle {
             cadastroRepositorio.saveAndFlush(cadastro);
         }
 
-        return cadastrar(new Cadastro());
+        cadastrar(new Cadastro());
+        return new ModelAndView("redirect:/inicio");
     }
 
     @GetMapping("/atualizacaoDados")
@@ -113,6 +114,6 @@ public class CadastroControle {
             }
         }
 
-        return mv;
+        return new ModelAndView("redirect:/listagemDePlantas");
     }
 }
