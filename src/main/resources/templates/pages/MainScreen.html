@@ -13,6 +13,16 @@
 </head>
 
 <body>
+<!-- Exibe o alerta se o 'alertMessage' estiver presente -->
+<div th:if="${alertMessage}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        alert([[${alertMessage}]]);
+        /*]]>*/
+    </script>
+</div>
+
+
 <input id="close-menu" class="close-menu" type="checkbox" aria-label="Fechar menu" role="button">
 <label class="close-menu-label" for="close-menu" title="Menu"></label>
 <aside class="menu white-bg">
@@ -52,16 +62,8 @@
         </td>
     </tr>
     </tbody>
-    <tbody>
-    <tr th:each="usuario : ${listaNomes}">
-        <td>
-            <h2 th:text="${usuario.nome}"></h2>
-        </td>
-    </tr>
-    </tbody>
 </table>
 
 <script src="../js/effectButton.js"></script>
 </body>
-
 </html>
