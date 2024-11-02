@@ -143,6 +143,13 @@ public class PlantaControle {
         String imagem = planta.getCaminhoImg();
         setImagemPorId(imagem);
 
+        // Verifique se já foi solicitada a adoção
+        Boolean disponivel = solicitacaoRepositorio.isPlantaDisponivel(cadastroService.getIdByEmail(), id);
+        if (disponivel != null && !disponivel) {
+            redirectAttributes.addFlashAttribute("alertMessage", "Você já solicitou a adoção desta planta, aguarde a resposta.");
+            return new ModelAndView("redirect:/listagemDePlantas");
+        }
+
         ModelAndView mv = new ModelAndView("pages/adotarPlanta");
         Optional<Planta> infoPlanta = plantaRepositorio.findById(id);
         mv.addObject("infoPlanta", infoPlanta);
@@ -154,11 +161,10 @@ public class PlantaControle {
 //            return new ModelAndView("redirect:/listagemDePlantas");
 //        }
 
-        if(solicitacao.getDisponivel() == null){
-            System.out.println("Ola");
-            redirectAttributes.addFlashAttribute("alertMessage", "Você já solicitou a adoção desta planta, aguarde a resposta do dono da planta.");
-            return new ModelAndView("redirect:/listagemDePlantas");
-        }
+//        if(){
+//            redirectAttributes.addFlashAttribute("alertMessage", "Você já solicitou a adoção desta planta, aguarde a resposta do dono da planta.");
+//            return new ModelAndView("redirect:/listagemDePlantas");
+//        }
 
         return mv;
     }
@@ -175,21 +181,32 @@ public class PlantaControle {
 
 //        redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
 
+        // Verificar se o usuário logado é o dono da planta
+        if (planta.getCadastro().getId().equals(cadastroService.getIdByEmail())) {
+            redirectAttributes.addFlashAttribute("alertMessage", "Você não pode adotar sua própria planta.");
+            return new ModelAndView("redirect:/listagemDePlantas");
+        }
 
-        redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
-        mv.setViewName("redirect:/listagemDePlantas");
+        // Verifica se a solicitação já foi feita
+        Boolean disponivel = solicitacaoRepositorio.isPlantaDisponivel(cadastroService.getIdByEmail(), getIdPlanta());
+        if (disponivel != null && !disponivel) {
+            redirectAttributes.addFlashAttribute("alertMessage", "Você já solicitou a adoção desta planta, aguarde a resposta.");
+            return new ModelAndView("redirect:/listagemDePlantas");
+        }
 
         solicitacao.setIdUser(cadastroService.getIdByEmail());
         solicitacao.setIdPlanta(getIdPlanta());
         solicitacao.setDisponivel(false);
         solicitacaoRepositorio.saveAndFlush(solicitacao);
 
+        redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
+        mv.setViewName("redirect:/listagemDePlantas");
         return mv;
     }
 
 
     @GetMapping("/doar/{idPlanta}/{idUsuario}")
-    public ModelAndView doar(Model model, @PathVariable("idPlanta") Long idPlanta, @PathVariable("idUsuario") Long idUsuario) {
+    public ModelAndView doar(Model model, @PathVariable("idPlanta") Long idPlanta, @PathVariable("idUsuario") Long idUsuario, Solicitacao solicitacao) {
         ModelAndView mv;
 
         Optional<Planta> plantaOptional = plantaRepositorio.findById(idPlanta);

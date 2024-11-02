@@ -13,7 +13,8 @@ public class Solicitacao implements Serializable {
     private Long id;
     private Long idUser;
     private Long idPlanta;
-    private Boolean disponivel;
+    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private Boolean disponivel = true;
 
     public Long getId() {
         return id;
