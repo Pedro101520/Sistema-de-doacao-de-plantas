@@ -50,9 +50,9 @@ public class EnvioEmail {
 
         String mensagem = "Olá tudo bem?\n\n" +
                 "Estou entrando em contato, pois apareceu um interessado em adotar a planta\n" +
-                "que você cadastrou no site doaplanta.com\n" +
+                "que você cadastrou no site doaplanta.shop\n" +
                 "Acesse o link e veja mais informações\n\n" +
-                "localhost:8080/doar/" + idPlanta + "/" + idUser;
+                "doaplanta.shop/doar/" + idPlanta + "/" + idUser;
 
         //Código de envio de emails, com Spring boot
         try{

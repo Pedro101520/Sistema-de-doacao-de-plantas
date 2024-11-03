@@ -55,10 +55,9 @@ public class CadastroControle {
             } else {
                 return new ModelAndView("erro", "mensagem", "Cadastro não encontrado.");
             }
-        } else {
-            cadastro.setSenha(passwordEncoder.encode(cadastro.getSenha()));
-            cadastroRepositorio.saveAndFlush(cadastro);
         }
+        cadastro.setSenha(passwordEncoder.encode(cadastro.getSenha()));
+        cadastroRepositorio.saveAndFlush(cadastro);
 
         cadastrar(new Cadastro());
         return new ModelAndView("redirect:/inicio");

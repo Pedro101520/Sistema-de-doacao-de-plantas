@@ -12,9 +12,12 @@
 <body>
 <div class="TopleftBackground"></div>
 <div class="BottomrightBackground"></div>
+<div class="scroll-indicator" onclick="scrollToBottom()">
+    ↓
+</div>
 <div class="cadastro-container">
     <h2>Cadastro</h2>
-    <form action="/cadastrarUsuario" th:object="${usuario}" method="POST">
+    <form action="/cadastrarUsuario" th:object="${usuario}" method="POST" id="cadastroForm">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="form-grid">
             <div class="input-group">
@@ -70,26 +73,35 @@
     </form>
 </div>
 
+<script>
+    function scrollToBottom() {
+        const container = document.querySelector('.cadastro-container');
+        container.scrollTo({
+            top: container.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+</script>
+
 <!--Instalando o JQUERY-->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!--JQUEY Mask-->
+<!--JQUERY Mask-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
-<!--Aplicando as mascaras-->
-</body>
+
 <script>
     $('#nome, #sobrenome, #rua, #bairro, #cidade, #estado').on('keypress', function (e) {
-    const char = String.fromCharCode(e.which);
-    const regex = /^[A-Za-zÀ-ÖØ-ÿ\s]+$/;
-    if (!regex.test(char)) {
-        e.preventDefault();
+        const char = String.fromCharCode(e.which);
+        const regex = /^[A-Za-zÀ-ÖØ-ÿ\s]+$/;
+        if (!regex.test(char)) {
+            e.preventDefault();
         }
     });
     $('#numero').mask('0000');
-    $('#telefone').mask('(00) 0000-0000');
+    $('#telefone').mask('(00) 0000-00000');
     $('#cep').mask('00000-000');
 
     // Confirmar senha
-    $('#senha').on('submit', function (e) {
+    $('#cadastroForm').on('submit', function (e) {
         let senha = $('#senha').val();
         let confirmarSenha = $('#confirmarSenha').val();
 
@@ -102,7 +114,7 @@
     });
 
     $('#senha, #confirmarSenha').on('input', function () {
-        let senha= $('#senha').val();
+        let senha = $('#senha').val();
         let confirmarSenha = $('#confirmarSenha').val();
 
         if (senha && confirmarSenha && senha !== confirmarSenha) {
@@ -112,4 +124,5 @@
         }
     });
 </script>
+</body>
 </html>
