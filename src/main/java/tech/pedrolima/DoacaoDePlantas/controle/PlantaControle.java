@@ -179,8 +179,6 @@ public class PlantaControle {
 
         envioEmail.emailDoacao(email, planta.getId(), cadastroService.getIdByEmail());
 
-//        redirectAttributes.addFlashAttribute("alertMessage", "Solicitação de adoção enviada com sucesso!");
-
         // Verificar se o usuário logado é o dono da planta
         if (planta.getCadastro().getId().equals(cadastroService.getIdByEmail())) {
             redirectAttributes.addFlashAttribute("alertMessage", "Você não pode adotar sua própria planta.");
